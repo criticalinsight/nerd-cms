@@ -65,6 +65,12 @@ static int my_strlen(const char* s) {
     return len;
 }
 
+// Exported strlen - called by NERD-generated code
+__attribute__((used))
+int strlen(const char* s) {
+    return my_strlen(s);
+}
+
 static int my_strcmp(const char* a, const char* b) {
     while (*a && *b && *a == *b) { a++; b++; }
     return *a - *b;
