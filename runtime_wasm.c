@@ -17,6 +17,13 @@ extern void js_print_string(const char* str);
 __attribute__((import_module("env"), import_name("js_print_number")))
 extern void js_print_number(double num);
 
+// CMS-specific imports from JS host
+__attribute__((import_module("env"), import_name("js_get_request_path")))
+extern int js_get_request_path(char* buf, int bufsize);
+
+__attribute__((import_module("env"), import_name("js_get_request_method")))
+extern int js_get_request_method(char* buf, int bufsize);
+
 // Memory allocation from JS (for strings returned from HTTP, etc.)
 __attribute__((export_name("wasm_alloc")))
 char* wasm_alloc(int size);
@@ -28,7 +35,7 @@ void wasm_free(char* ptr);
 // Simple Memory Management
 // ============================================================================
 
-static char heap[65536];  // 64KB heap
+static char heap[131072];  // 128KB heap (increased for HTML templates)
 static int heap_offset = 0;
 
 char* wasm_alloc(int size) {
@@ -42,6 +49,12 @@ void wasm_free(char* ptr) {
     (void)ptr;  // No-op for bump allocator
 }
 
+// Reset heap for each request
+__attribute__((export_name("wasm_reset_heap")))
+void wasm_reset_heap(void) {
+    heap_offset = 0;
+}
+
 // ============================================================================
 // String Helpers
 // ============================================================================
@@ -50,6 +63,54 @@ static int my_strlen(const char* s) {
     int len = 0;
     while (s && s[len]) len++;
     return len;
+}
+
+static int my_strcmp(const char* a, const char* b) {
+    while (*a && *b && *a == *b) { a++; b++; }
+    return *a - *b;
+}
+
+static int my_strncmp(const char* a, const char* b, int n) {
+    while (n > 0 && *a && *b && *a == *b) { a++; b++; n--; }
+    return n == 0 ? 0 : *a - *b;
+}
+
+static void my_strcpy(char* dst, const char* src) {
+    while (*src) *dst++ = *src++;
+    *dst = 0;
+}
+
+// ============================================================================
+// CMS Runtime Functions (called by NERD)
+// ============================================================================
+
+// Get request path - returns pointer to static buffer
+static char request_path_buf[256];
+__attribute__((export_name("nerd_cms_get_path")))
+const char* nerd_cms_get_path(void) {
+    js_get_request_path(request_path_buf, sizeof(request_path_buf));
+    return request_path_buf;
+}
+
+// Get request method
+static char request_method_buf[16];
+__attribute__((export_name("nerd_cms_get_method")))
+const char* nerd_cms_get_method(void) {
+    js_get_request_method(request_method_buf, sizeof(request_method_buf));
+    return request_method_buf;
+}
+
+// Route matching helpers
+__attribute__((export_name("nerd_cms_route_eq")))
+int nerd_cms_route_eq(const char* path) {
+    nerd_cms_get_path();
+    return my_strcmp(request_path_buf, path) == 0;
+}
+
+__attribute__((export_name("nerd_cms_route_starts")))
+int nerd_cms_route_starts(const char* prefix) {
+    nerd_cms_get_path();
+    return my_strncmp(request_path_buf, prefix, my_strlen(prefix)) == 0;
 }
 
 // ============================================================================
