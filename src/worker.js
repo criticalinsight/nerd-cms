@@ -6,6 +6,7 @@
  */
 
 import wasmModule from "../cms.wasm";
+import { homeTemplate, postTemplate, aboutTemplate, notFoundTemplate } from "./templates.js";
 
 // Collected console output during request handling
 let outputBuffer = [];
@@ -18,45 +19,11 @@ function readCString(memory, ptr) {
   return new TextDecoder().decode(bytes.subarray(ptr, end));
 }
 
-// Create the import object for the Wasm module
-function createImports(memory) {
-  return {
-    env: {
-      memory: memory,
-
-      // Console output - called by puts() and printf() in runtime
-      js_print_string: (ptr) => {
-        const str = readCString(memory, ptr);
-        outputBuffer.push(str);
-        console.log("[NERD]", str);
-      },
-
-      js_print_number: (num) => {
-        // Format like %g - remove trailing zeros
-        const formatted = Number.isInteger(num) ? String(num) : num.toPrecision(6).replace(/\.?0+$/, '');
-        outputBuffer.push(formatted);
-        console.log("[NERD]", formatted);
-      },
-
-      // puts() - clang may optimize printf("%s\n", str) to puts(str)
-      puts: (ptr) => {
-        const str = readCString(memory, ptr);
-        outputBuffer.push(str);
-        console.log("[NERD]", str);
-        return 0;
-      },
-
-      // printf() stub (variadic, complex to implement in JS - our C runtime handles it)
-      printf: () => {
-        console.log("[NERD] printf called (stub)");
-        return 0;
-      },
-    },
-  };
-}
-
 export default {
   async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+    const path = url.pathname;
+
     // Reset output buffer for each request
     outputBuffer = [];
 
@@ -94,11 +61,48 @@ export default {
         instance.exports.main();
       }
 
-      // Return collected output as the response
-      return new Response(outputBuffer.join("\n") + "\n", {
-        status: 200,
+      // Route handling with themed templates
+      let html;
+      
+      if (path === "/" || path === "") {
+        // Home page with NERD output
+        html = homeTemplate({ 
+          posts: [
+            {
+              slug: "/blog/hello-world",
+              title: "Welcome to NERD CMS",
+              date: new Date().toISOString(),
+              excerpt: outputBuffer.join(" ")
+            }
+          ]
+        });
+      } else if (path === "/about") {
+        html = aboutTemplate();
+      } else if (path.startsWith("/blog")) {
+        // Blog post
+        html = postTemplate({
+          title: "NERD Output",
+          content: `<p>${outputBuffer.map(escapeHtml).join("</p><p>")}</p>`,
+          date: new Date().toISOString(),
+          author: "NERD Runtime"
+        });
+      } else if (path === "/raw") {
+        // Raw text output (original behavior)
+        return new Response(outputBuffer.join("\n") + "\n", {
+          status: 200,
+          headers: {
+            "Content-Type": "text/plain; charset=utf-8",
+            "X-Powered-By": "NERD-CMS",
+          },
+        });
+      } else {
+        html = notFoundTemplate();
+      }
+
+      return new Response(html, {
+        status: path === "/404" ? 404 : 200,
         headers: {
-          "Content-Type": "text/plain; charset=utf-8",
+          "Content-Type": "text/html; charset=utf-8",
           "X-Powered-By": "NERD-CMS",
         },
       });
@@ -110,3 +114,11 @@ export default {
     }
   },
 };
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
