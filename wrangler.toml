@@ -5,6 +5,11 @@ compatibility_date = "2024-01-01"
 [build]
 command = "./build.sh"
 
+# KV Namespace for content storage
+[[kv_namespaces]]
+binding = "CONTENT"
+id = "77db10ac0b1e4471b51fef221a0523a1"
+
 # Uncomment to deploy to a custom domain
 # [route]
 # pattern = "cms.example.com/*"
