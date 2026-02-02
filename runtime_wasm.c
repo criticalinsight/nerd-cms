@@ -26,7 +26,7 @@ extern int js_get_request_method(char* buf, int bufsize);
 
 // Memory allocation from JS (for strings returned from HTTP, etc.)
 __attribute__((export_name("wasm_alloc")))
-char* wasm_alloc(int size);
+char* wasm_alloc(unsigned long size);
 
 __attribute__((export_name("wasm_free")))
 void wasm_free(char* ptr);
@@ -38,8 +38,8 @@ void wasm_free(char* ptr);
 static char heap[131072];  // 128KB heap (increased for HTML templates)
 static int heap_offset = 0;
 
-char* wasm_alloc(int size) {
-    if (heap_offset + size > (int)sizeof(heap)) return 0;
+char* wasm_alloc(unsigned long size) {
+    if (heap_offset + size > (unsigned long)sizeof(heap)) return 0;
     char* ptr = &heap[heap_offset];
     heap_offset += size;
     return ptr;
@@ -56,18 +56,31 @@ void wasm_reset_heap(void) {
 }
 
 // ============================================================================
-// String Helpers
+// Data Passing (Shared Buffer)
 // ============================================================================
 
-static int my_strlen(const char* s) {
-    int len = 0;
+static char shared_buffer[65536]; // 64KB for blog lists and post data
+
+__attribute__((export_name("wasm_get_shared_buffer")))
+char* wasm_get_shared_buffer(void) {
+    return shared_buffer;
+}
+
+__attribute__((used))
+double print_buffer(void) {
+    js_print_string(shared_buffer);
+    return 0.0;
+}
+
+static unsigned long my_strlen(const char* s) {
+    unsigned long len = 0;
     while (s && s[len]) len++;
     return len;
 }
 
 // Exported strlen - called by NERD-generated code
 __attribute__((used))
-int strlen(const char* s) {
+unsigned long strlen(const char* s) {
     return my_strlen(s);
 }
 

@@ -7,15 +7,19 @@
 
 ## 🚀 Live Demo
 
-**[https://nerd-cms.iamkingori.workers.dev/](https://nerd-cms.iamkingori.workers.dev/)**
+**[https://research.moecapital.com/](https://research.moecapital.com/)**
 
 ## Overview
 
 NERD CMS demonstrates the power of the NERD programming language compiled to WebAssembly and running on Cloudflare's edge network. This project showcases:
 
-- **NERD-to-Wasm Compilation**: Complete build pipeline from NERD source → LLVM IR → WebAssembly
+- **Integrated AI Dashboard**: Single-input ticker analysis for stocks and crypto symbols
+- **Telegram Bot Sentinel**: Real-time ticker extraction and automated research from Telegram channels
+- **Visual Sentiment**: Color-coded ratings (🟢/🟡/🔴) for immediate research conclusions
+- **Moe AI Research**: Morgan Housel-styled financial analysis powered by Gemini 2.0 Flash following a 13-point framework
+- **Unified Source**: High-stability monolithic `cms.nerd` logic to optimize Wasm compilation
 - **Edge Computing**: Zero cold-start serverless execution on Cloudflare Workers
-- **Minimal Footprint**: ~3KB Wasm binary with custom runtime
+- **Minimal Footprint**: ~16KB Wasm binary with custom runtime
 
 ## Architecture
 
@@ -85,21 +89,29 @@ The `build.sh` script executes a 4-step compilation process:
 | Step | Input → Output                      | Tool                  |
 | ---- | ----------------------------------- | --------------------- |
 | 1    | `cms.nerd` → `cms.ll`               | NERD compiler         |
+| 1.5  | Inject LLVM Declarations            | `sed` (Auto-injection)|
 | 2    | `cms.ll` → `cms.o`                  | Clang (wasm32 target) |
 | 3    | `runtime_wasm.c` → `runtime_wasm.o` | Clang (wasm32 target) |
-| 4    | `*.o` → `cms.wasm`                  | wasm-ld               |
+| 4    | `*.o` → `cms.wasm`                  | wasm-ld (512KB heap)  |
 
 ## Runtime
 
 The `runtime_wasm.c` provides NERD's standard library functions compiled to WebAssembly:
 
-- **I/O**: `printf`, `puts` → delegates to JS host
-- **Memory**: Bump allocator with 64KB heap
-- **HTTP/JSON/MCP**: Stub implementations (extensible)
+- **I/O**: `printf` → delegates to JS host via `js_print_string`
+- **Data Bridge**: `wasm_get_shared_buffer` and `print_buffer` for high-performance JS-to-Wasm data passing
+- **Memory**: Bump allocator with 512KB initial memory
+- **HTTP/JSON/MCP**: Native NERD module support (compiled to LLVM)
 
 ## Configuration
 
-Edit `wrangler.toml` to customize deployment:
+The AI assistant (**Moe**) requires a Gemini API key. Configure it using Wrangler:
+
+```bash
+wrangler secret put GEMINI_API_KEY
+```
+
+Edit `wrangler.toml` for standard settings:
 
 ```toml
 name = "nerd-cms"

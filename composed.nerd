@@ -1,0 +1,276 @@
+-- ============================================================================
+-- Theme: Anemone
+-- ============================================================================
+
+fn render_css
+  out "<style>"
+  -- Core Variables from suCSS / Anemone
+  out ":root{--sans-font:-apple-system,BlinkMacSystemFont,'Avenir Next',Avenir,'Nimbus Sans L',Roboto,'Noto Sans','Segoe UI',Arial,Helvetica,'Helvetica Neue',sans-serif;--mono-font:Consolas,Menlo,Monaco,'Andale Mono','Ubuntu Mono',monospace;--standard-border-radius:5px;--bg:#EEEEEE;--bg-light:#CBCDCD;--text:#41474E;--text-light:#646868;--accent:#D26878;--accent-light:#e08f67;--accent-text:var(--bg);--border:#646868;--link:#5690AF}"
+  out "@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#222529;--bg-light:#464949;--text:#D6D6D6;--text-light:#DBD5BC;--accent:#78B6AD;--accent-light:#87C9E5;--accent-text:var(--bg);--border:#DBD5BC;--link:#E2AEA2}}"
+  out "[data-theme=dark]{color-scheme:dark;--bg:#222529;--bg-light:#464949;--text:#D6D6D6;--text-light:#DBD5BC;--accent:#78B6AD;--accent-light:#87C9E5;--accent-text:var(--bg);--border:#DBD5BC;--link:#E2AEA2}"
+  out "[data-theme=light]{color-scheme:light;--bg:#EEEEEE;--bg-light:#CBCDCD;--text:#41474E;--text-light:#646868;--accent:#D26878;--accent-light:#e08f67;--accent-text:var(--bg);--border:#646868;--link:#5690AF}"
+  
+  -- Global Styles
+  out "*{box-sizing:border-box;margin:0;padding:0}"
+  out "html{color-scheme:light dark;font-family:var(--mono-font);scroll-behavior:smooth}"
+  out "body{min-height:100svh;font-size:1rem;display:grid;grid-template-columns:1fr min(47rem,90%) 1fr;grid-template-rows:auto 1fr auto;grid-row-gap:.625rem;color:var(--text);background-color:var(--bg);line-height:1.6}"
+  out "body>*{grid-column:2}"
+  
+  -- Navigation
+  out "#nav-bar{padding:0.625rem 0 0;display:flex;flex-wrap:wrap;gap:0.25rem;justify-content:flex-end;align-items:center;font-family:var(--mono-font)}"
+  out "#nav-bar a{color:var(--text);text-decoration:none;padding:0 .25rem}"
+  out "#nav-bar a:hover{background-color:var(--link);color:var(--bg)}"
+  
+  -- Headings
+  out "h1,h2,h3,h4,h5,h6{margin:.5em 0;line-height:1.1;font-weight:700}"
+  out "h1{font-size:2rem}h2{font-size:1.75rem}h3{font-size:1.5rem}"
+  out "h1::before,h2::before,h3::before,h4::before,h5::before,h6::before{color:var(--accent);content:'# '}"
+  
+  -- Content
+  out "p{margin:1rem 0;text-wrap:pretty}"
+  out "a,a:visited{text-decoration:none;border-radius:.125rem;color:var(--link);transition:all 0.2s}"
+  out "a:hover{background-color:var(--link);color:var(--bg)}"
+  
+  -- Lists
+  out "ul{list-style:square;margin:1rem 0;padding-left:1.5rem}"
+  out "ul li{margin-bottom:.125rem;position:relative}"
+  out "ul li::marker{content:'» ';color:var(--accent)}"
+  out "ul li:hover::marker{content:'# ';font-weight:700;color:var(--link)}"
+  
+  -- Blockquotes
+  out "blockquote{margin:1rem 0 1rem 1.25rem;padding:.5rem 0 0 .5rem;border-inline-start:.375rem solid var(--accent);font-style:italic;color:var(--text-light)}"
+  
+  -- Footer
+  out "footer{color:var(--text-light);font-size:.875rem;padding:1rem 0 2rem}"
+  out "footer hr{border:1px dashed var(--accent);margin:.5rem 0}"
+  out "#footer-container{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center}"
+  
+  -- Theme Toggle
+  out ".theme-toggle{cursor:pointer;background:none;border:none;font-size:1.25rem;color:var(--text);opacity:0.7;padding:0 .5rem;display:inline-flex;align-items:center;justify-content:center}"
+  out ".theme-toggle:hover{opacity:1;color:var(--accent)}"
+  
+  -- Code
+  out "code{font-family:var(--mono-font);padding:0 .125rem;border-radius:3px;color:var(--bg);background-color:var(--text)}"
+  out "pre{border:1px solid var(--accent);border-radius:var(--standard-border-radius);background-color:var(--bg-light);padding:.625rem;overflow:auto;margin:1rem 0}"
+  out "pre code{background:none;color:inherit;padding:0}"
+  
+  -- Article
+  out "article{margin-bottom:2.5rem}"
+  out ".post-meta{font-size:.9rem;color:var(--text-light);margin-bottom:1rem}"
+  
+  out "</style>"
+
+fn render_head_seo title desc image
+  out "<!DOCTYPE html>"
+  out "<html lang=\"en\">"
+  out "<head>"
+  out "<meta charset=\"UTF-8\">"
+  out "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+  out "<title>"
+  out title
+  out "</title>"
+  out "<meta name=\"description\" content=\""
+  out desc
+  out "\">"
+  out "<meta property=\"og:title\" content=\""
+  out title
+  out "\">"
+  out "<meta property=\"og:description\" content=\""
+  out desc
+  out "\">"
+  out "<meta property=\"og:image\" content=\""
+  out image
+  out "\">"
+  out "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS Feed\" href=\"/rss.xml\">"
+  call render_css
+
+fn render_head title
+  call render_head_seo title "A NERD CMS Site" "none"
+
+fn render_header
+  out "</head>"
+  out "<body>"
+  out "<nav id=\"nav-bar\">"
+  out "<a href=\"/\"> /home/ </a>"
+  out "<a href=\"/about\"> /about/ </a>"
+  out "<a href=\"/blog\"> /blog/ </a>"
+  out "<a href=\"/plugins\"> /plugins/ </a>"
+  out "<div class=\"theme-toggle\" onclick=\"toggleTheme()\" role=\"button\" tabindex=\"0\">☀</div>"
+  out "</nav>"
+  out "<main>"
+
+fn render_footer
+  out "</main>"
+  out "<footer>"
+  out "<hr>"
+  out "<div id=\"footer-container\">"
+  out "<p>Made using <a href=\"https://nerd-lang.org\">nerd</a> cms — anemone theme | <a href=\"/admin\">Admin</a>"
+  out "</div>"
+  out "</footer>"
+  out "<script>"
+  out "(function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.querySelector('.theme-toggle').textContent=t==='dark'?'☀':'❄'})();"
+  out "function toggleTheme(){var h=document.documentElement,c=h.getAttribute('data-theme')||'light',n=c==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.querySelector('.theme-toggle').textContent=n==='dark'?'☀':'❄'}"
+  out "</script>"
+  out "</body>"
+  out "</html>"
+
+fn render_widget_newsletter
+  out "<div style=\"border-top:1px dashed var(--accent);margin-top:2rem;padding-top:1rem\">"
+  out "<h3>Newsletter</h3>"
+  out "<p>Subscribe to get the latest posts delivered to your inbox.</p>"
+  out "<form onsubmit=\"event.preventDefault();subscribe(this);\" style=\"display:flex;gap:0.5rem\">"
+  out "<input type=\"email\" name=\"email\" placeholder=\"Your email\" style=\"flex:1\" required>"
+  out "<button type=\"submit\">Subscribe</button>"
+  out "</form>"
+  out "<p id=\"sub-msg\" style=\"display:none;color:var(--accent);font-size:0.8rem;margin-top:0.5rem\"></p>"
+  out "<script>async function subscribe(f){const e=f.email.value;const r=await fetch('/api/subscribe',{method:'POST',body:JSON.stringify({email:e})});if(r.ok){f.reset();document.getElementById('sub-msg').innerText='Thanks for subscribing!';document.getElementById('sub-msg').style.display='block';}else{alert('Error');}}</script>"
+  out "</div>"
+
+fn render_blog
+  call render_head "anemone | Blog"
+  call render_header
+  out "<h2>Blog Posts</h2>"
+  out "<input type=\"text\" placeholder=\"Search posts...\" oninput=\"search(this.value)\" style=\"width:100%;padding:0.5rem;margin-bottom:1rem;border:1px solid var(--border)\">"
+  out "<div id=\"search-results\"></div>"
+  out "<ul id=\"blog-list\">"
+  call print_buffer
+  out "</ul>"
+  
+  -- Client-side search logic
+  out "<script>"
+  out "let postsCache = null;"
+  out "async function search(q) {"
+  out "  if(!q) { document.getElementById('search-results').innerHTML = ''; document.getElementById('blog-list').style.display='block'; return; }"
+  out "  if(!postsCache) { const r = await fetch('/feed.json'); const j = await r.json(); postsCache = j.items; }"
+  out "  const results = postsCache.filter(p => (p.title||'').toLowerCase().includes(q.toLowerCase()));"
+  out "  document.getElementById('blog-list').style.display = 'none';"
+  out "  document.getElementById('search-results').innerHTML = '<ul>' + results.map(p => '<li><a href=\"' + p.url + '\">' + p.title + '</a> <span class=\"text-secondary\">(' + (p.date_published||'') + ')</span></li>').join('') + '</ul>';"
+  out "}"
+  out "</script>"
+  call render_widget_newsletter
+  call render_footer
+
+fn render_post
+  call render_head "anemone | Post"
+  call render_header
+  out "<article>"
+  call print_buffer
+  out "</article>"
+  call render_widget_newsletter
+  out "<p><a href=\"/blog\">← back to blog</a></p>"
+  call render_footer
+
+fn render_home
+  call render_head "anemone"
+  call render_header
+  out "<h2>Overview</h2>"
+  out "<p>anemone theme is designed to provide a nearly no-JavaScript, efficient, and minimalist experience for your website. Embracing simplicity, the theme focuses on content and readability, ensuring a seamless user experience without unnecessary distractions.</p>"
+  out "<blockquote><p>“Simplicity is the ultimate sophistication.” — Leonardo da Vinci</p></blockquote>"
+  out "<h2>Features</h2>"
+  out "<ul>"
+  out "<li>Edge computing on Cloudflare Workers</li>"
+  out "<li>Monospace-first minimalist design</li>"
+  out "<li>Native dark/light mode switching</li>"
+  out "<li>Content served from Cloudflare KV</li>"
+  out "<li>100% NERD — compiled to WebAssembly</li>"
+  out "</ul>"
+  out "<h2>Links</h2>"
+  out "<ul>"
+  out "<li>Code: <a href=\"https://github.com/criticalinsight/nerd-cms\">GitHub</a></li>"
+  out "<li>Code: <a href=\"https://github.com/criticalinsight/nerd-cms\">GitHub</a></li>"
+  out "<li>Language: <a href=\"https://nerd-lang.org\">nerd-lang.org</a></li>"
+  out "</ul>"
+  call render_widget_newsletter
+  call render_footer
+
+fn render_about
+  call render_head "anemone | About"
+  call render_header
+  out "<h2>About</h2>"
+  out "<p>This is a demonstration of the NERD CMS running the Anemone theme. Everything you see here is generated by a WebAssembly module written in the NERD programming language.</p>"
+  out "<p>Feel free to explore the blog and other sections.</p>"
+  call render_footer
+
+fn render_plugins
+  call render_head "anemone | Plugins"
+  call render_header
+  out "<h2>Plugins</h2>"
+  out "<p>The plugin system allows for extending the CMS with additional functionality like analytics, SEO optimizations, and custom components.</p>"
+  call render_footer
+
+fn render_404
+  call render_head "anemone | 404"
+  call render_header
+  out "<h2>404</h2>"
+  out "<p>The page you are looking for does not exist.</p>"
+  call render_footer
+
+-- ============================================================================
+-- NERD CMS - Core Logic
+-- ============================================================================
+
+fn render_admin
+  call render_head "anemone | Admin"
+  call render_header
+  out "<h2>Admin Area</h2>"
+  
+  -- Admin Container (No Login View as per request)
+  out "<div id=\"admin-app\">"
+  out "<div id=\"editor-view\">"
+  out "<div style=\"margin-bottom:1rem;display:flex;gap:16px\">"
+  out "<button onclick=\"showTab('editor')\" style=\"background:var(--text);color:var(--bg)\">New Post</button>"
+  out "<button onclick=\"showTab('subs')\" style=\"background:var(--bg-light);color:var(--text)\">Subscribers</button>"
+  out "<button onclick=\"logout()\" style=\"background:var(--accent);color:var(--bg);margin-left:auto\">Logout</button>"
+  out "</div>"
+  
+  out "<div id=\"tab-editor\">"
+  out "<p>Create or Edit a Post (Markdown)</p>"
+  out "<input type=\"text\" id=\"post-slug\" placeholder=\"slug\" style=\"width:100%;margin-bottom:8px\">"
+  out "<textarea id=\"post-content\" rows=\"15\" placeholder=\"---\\ntitle: My Post\\n---\" style=\"width:100%;font-family:monospace;margin-bottom:16px\"></textarea>"
+  out "<div style=\"display:flex;gap:8px\">"
+  out "<button onclick=\"savePost()\" style=\"flex:1\">Save Post</button>"
+  out "<button onclick=\"togglePreview()\" style=\"flex:1;background:var(--bg-light);color:var(--text)\">Preview</button>"
+  out "</div>"
+  out "<div id=\"preview-area\" style=\"margin-top:16px;border-top:1px dashed var(--border);padding-top:16px;display:none\"><h3>Preview</h3><div id=\"preview-content\"></div></div>"
+  out "</div>"
+  
+  out "<div id=\"tab-subs\" style=\"display:none\">"
+  out "<h3>Subscribers</h3>"
+  out "<button onclick=\"exportCSV()\" style=\"margin-bottom:16px\">Download CSV</button>"
+  out "<div id=\"subs-list\">Loading...</div>"
+  out "</div>"
+  out "</div>"
+  out "</div>"
+  
+  -- Admin Logic
+  out "<script>"
+  out "window.APP={token:localStorage.getItem('nerd_token')||'nerd-token-123'};"
+  out "async function savePost(){"
+  out "const s=document.getElementById('post-slug').value,c=document.getElementById('post-content').value;"
+  out "if(!s||!c)return alert('Missing slug or content');"
+  out "try{const r=await fetch('/api/admin/save?token='+window.APP.token,{method:'POST',body:JSON.stringify({slug:s,content:c}),headers:{'Content-Type':'application/json'}});"
+  out "const j=await r.json();if(j.success)alert('Saved!');else alert('Error: '+j.error);}catch(e){alert('Error: '+e.message);}}"
+  out "function togglePreview(){const p=document.getElementById('preview-area'),c=document.getElementById('preview-content');"
+  out "if(p.style.display==='none'){c.innerHTML=document.getElementById('post-content').value.replace(/^---[\\s\\S]*?---\\n/,'');p.style.display='block';}else p.style.display='none';}"
+  out "function showTab(t){document.getElementById('tab-editor').style.display=t==='editor'?'block':'none';document.getElementById('tab-subs').style.display=t==='subs'?'block':'none';"
+  out "if(t==='subs')loadSubs();}"
+  out "async function loadSubs(){const r=await fetch('/api/subscribers',{headers:{'token':window.APP.token}});if(r.ok){const j=await r.json();"
+  out "document.getElementById('subs-list').innerHTML='<ul>'+j.subscribers.map(s=>'<li>'+s+'</li>').join('')+'</ul>';}}"
+  out "function logout(){localStorage.removeItem('nerd_token');location.reload();}"
+  out "</"
+  out "script>"
+  call render_footer
+
+fn render_rss
+  out "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
+  out "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:atom=\"http://www.w3.org/2005/Atom\">"
+  out "<channel>"
+  out "<title>NerdCMS Blog</title>"
+  out "<link>https://nerd-cms.iamkingori.workers.dev</link>"
+  out "<description>Thoughts and updates from the edge.</description>"
+  call print_buffer
+  out "</channel>"
+  out "</rss>"
+
+fn main
+  call render_home
