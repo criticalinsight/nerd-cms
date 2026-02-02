@@ -1,0 +1,7 @@
+-- NERD CMS for Cloudflare Workers
+-- A minimal content management system
+
+fn main
+  out "Welcome to NERD CMS"
+  out "Powered by No Effort Required, Done"
+  out five plus three

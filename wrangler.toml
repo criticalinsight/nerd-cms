@@ -1,0 +1,11 @@
+name = "nerd-cms"
+main = "src/worker.js"
+compatibility_date = "2024-01-01"
+
+[build]
+command = "./build.sh"
+
+# Uncomment to deploy to a custom domain
+# [route]
+# pattern = "cms.example.com/*"
+# zone_name = "example.com"
