@@ -218,6 +218,64 @@ export function aboutTemplate() {
 }
 
 /**
+ * Plugins admin page template
+ */
+export function pluginsTemplate({ plugins = [] }) {
+  const pluginListHtml = plugins.length > 0
+    ? `<table>
+        <thead>
+          <tr>
+            <th>Plugin</th>
+            <th>Version</th>
+            <th>Description</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${plugins.map(p => `
+            <tr>
+              <td><strong>${escapeHtml(p.name)}</strong></td>
+              <td><code>${escapeHtml(p.version)}</code></td>
+              <td class="text-secondary">${escapeHtml(p.description)}</td>
+              <td>${p.enabled 
+                ? '<span class="tag" style="background:var(--accent);color:#fff">Active</span>' 
+                : '<span class="tag">Disabled</span>'}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>`
+    : '<p class="text-secondary">No plugins registered.</p>';
+
+  const content = `
+    <article>
+      <h1>🔌 Plugins</h1>
+      <p>Manage installed plugins for NERD CMS.</p>
+      
+      <h2>Registered Plugins</h2>
+      ${pluginListHtml}
+      
+      <h2 class="mt-lg">API</h2>
+      <p>Get plugins list as JSON:</p>
+      <pre><code>GET /api/plugins</code></pre>
+      
+      <h2>Available Hooks</h2>
+      <ul>
+        <li><code>request:start</code> — Before request processing</li>
+        <li><code>request:end</code> — After response is ready</li>
+        <li><code>route:match</code> — When a route is matched</li>
+        <li><code>content:load</code> — When content is loaded</li>
+        <li><code>content:transform</code> — Transform content before render</li>
+        <li><code>template:before</code> — Before template render</li>
+        <li><code>template:after</code> — After template render</li>
+        <li><code>output:filter</code> — Filter final output</li>
+      </ul>
+    </article>
+  `;
+
+  return baseTemplate({ title: 'Plugins', content });
+}
+
+/**
  * 404 error page template
  */
 export function notFoundTemplate() {

@@ -6,7 +6,11 @@
  */
 
 import wasmModule from "../cms.wasm";
-import { homeTemplate, postTemplate, aboutTemplate, notFoundTemplate } from "./templates.js";
+import { homeTemplate, postTemplate, aboutTemplate, notFoundTemplate, pluginsTemplate } from "./templates.js";
+import pluginSystem, { HOOKS, initDefaultPlugins, executeHooks, getPlugins } from "./plugins.js";
+
+// Initialize default plugins
+initDefaultPlugins();
 
 // Collected console output during request handling
 let outputBuffer = [];
@@ -23,11 +27,38 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const path = url.pathname;
+    const headers = new Headers();
+
+    // Create request context for plugins
+    const requestContext = {
+      request,
+      url,
+      path,
+      method: request.method,
+      headers,
+      env,
+      ctx,
+    };
 
     // Reset output buffer for each request
     outputBuffer = [];
 
     try {
+      // Hook: REQUEST_START
+      let hookData = await executeHooks(HOOKS.REQUEST_START, { path }, requestContext);
+      
+      // If hook returned cached response, use it
+      if (hookData?.cached && hookData?.html) {
+        return new Response(hookData.html, {
+          status: 200,
+          headers: {
+            "Content-Type": "text/html; charset=utf-8",
+            "X-Powered-By": "NERD-CMS",
+            "X-Cache": "HIT",
+          },
+        });
+      }
+
       // Instantiate the Wasm module - it exports its own memory with data segments
       const instance = await WebAssembly.instantiate(wasmModule, {
         env: {
@@ -61,8 +92,18 @@ export default {
         instance.exports.main();
       }
 
+      // Hook: CONTENT_LOAD
+      let content = await executeHooks(HOOKS.CONTENT_LOAD, outputBuffer.join("\n"), {
+        ...requestContext,
+        format: 'text',
+      });
+
+      // Hook: ROUTE_MATCH
+      await executeHooks(HOOKS.ROUTE_MATCH, { path, matched: true }, requestContext);
+
       // Route handling with themed templates
       let html;
+      let status = 200;
       
       if (path === "/" || path === "") {
         // Home page with NERD output
@@ -78,6 +119,9 @@ export default {
         });
       } else if (path === "/about") {
         html = aboutTemplate();
+      } else if (path === "/plugins") {
+        // Plugins admin page
+        html = pluginsTemplate({ plugins: getPlugins() });
       } else if (path.startsWith("/blog")) {
         // Blog post
         html = postTemplate({
@@ -95,17 +139,48 @@ export default {
             "X-Powered-By": "NERD-CMS",
           },
         });
+      } else if (path === "/api/plugins") {
+        // Plugins API
+        return new Response(JSON.stringify(getPlugins(), null, 2), {
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+            "X-Powered-By": "NERD-CMS",
+          },
+        });
       } else {
         html = notFoundTemplate();
+        status = 404;
       }
 
-      return new Response(html, {
-        status: path === "/404" ? 404 : 200,
-        headers: {
-          "Content-Type": "text/html; charset=utf-8",
-          "X-Powered-By": "NERD-CMS",
-        },
+      // Hook: TEMPLATE_BEFORE
+      html = await executeHooks(HOOKS.TEMPLATE_BEFORE, html, {
+        ...requestContext,
+        title: path === "/" ? "Home" : path.slice(1),
       });
+
+      // Hook: TEMPLATE_AFTER (SEO, etc.)
+      html = await executeHooks(HOOKS.TEMPLATE_AFTER, html, {
+        ...requestContext,
+        title: path === "/" ? "Home" : path.slice(1),
+        description: outputBuffer[0] || "Powered by NERD CMS",
+        url: url.href,
+      });
+
+      // Hook: OUTPUT_FILTER
+      html = await executeHooks(HOOKS.OUTPUT_FILTER, html, requestContext);
+
+      // Hook: REQUEST_END
+      await executeHooks(HOOKS.REQUEST_END, { html, status }, {
+        ...requestContext,
+        headers,
+      });
+
+      // Set response headers
+      headers.set("Content-Type", "text/html; charset=utf-8");
+      headers.set("X-Powered-By", "NERD-CMS");
+
+      return new Response(html, { status, headers });
     } catch (error) {
       return new Response(`NERD CMS Error: ${error.message}\n${error.stack}`, {
         status: 500,
