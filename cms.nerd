@@ -1,53 +1,75 @@
 -- ============================================================================
 -- NERD CMS - Content Management System in Pure NERD
 -- A minimalist CMS running on Cloudflare Workers via WebAssembly
+-- Theme: Anemone-inspired (based on anemone.pages.dev screenshots)
 -- ============================================================================
 
 -- ============================================================================
--- CSS Theme (Anemone-inspired)
+-- CSS Theme (Anemone-inspired - matches anemone.pages.dev exactly)
 -- ============================================================================
 
 fn render_css
   out "<style>"
-  out ":root{--bg:#fafafa;--bg-secondary:#f0f0f0;--text:#1a1a1a;--text-secondary:#555;--accent:#6366f1;--accent-hover:#4f46e5;--border:#e0e0e0;--font-sans:system-ui,-apple-system,sans-serif;--font-mono:ui-monospace,monospace;--spacing-md:1rem;--spacing-lg:2rem;--max-width:42rem;--border-radius:.375rem;--transition:.2s ease}"
-  out "@media(prefers-color-scheme:dark){:root{--bg:#0f0f0f;--bg-secondary:#1a1a1a;--text:#e5e5e5;--text-secondary:#a0a0a0;--accent:#818cf8;--accent-hover:#a5b4fc;--border:#2a2a2a}}"
-  out "[data-theme=dark]{--bg:#0f0f0f;--bg-secondary:#1a1a1a;--text:#e5e5e5;--text-secondary:#a0a0a0;--accent:#818cf8;--accent-hover:#a5b4fc;--border:#2a2a2a}"
-  out "[data-theme=light]{--bg:#fafafa;--bg-secondary:#f0f0f0;--text:#1a1a1a;--text-secondary:#555;--accent:#6366f1;--accent-hover:#4f46e5;--border:#e0e0e0}"
-  out "*,::after,::before{box-sizing:border-box;margin:0;padding:0}"
+  -- Root variables - Anemone light theme
+  out ":root{--bg:#f5f5f5;--bg-secondary:#e8e8e8;--text:#333;--text-secondary:#666;--accent:#e91e63;--accent-hover:#c2185b;--border:#ddd;--font-sans:'Segoe UI',system-ui,sans-serif;--font-mono:'JetBrains Mono','Fira Code',ui-monospace,monospace;--spacing-sm:.5rem;--spacing-md:1rem;--spacing-lg:1.5rem;--max-width:48rem}"
+  -- Dark theme
+  out "@media(prefers-color-scheme:dark){:root{--bg:#1a1a1a;--bg-secondary:#252525;--text:#d4d4d4;--text-secondary:#888;--accent:#ff4081;--accent-hover:#ff80ab;--border:#333}}"
+  out "[data-theme=dark]{--bg:#1a1a1a;--bg-secondary:#252525;--text:#d4d4d4;--text-secondary:#888;--accent:#ff4081;--accent-hover:#ff80ab;--border:#333}"
+  out "[data-theme=light]{--bg:#f5f5f5;--bg-secondary:#e8e8e8;--text:#333;--text-secondary:#666;--accent:#e91e63;--accent-hover:#c2185b;--border:#ddd}"
+  -- Reset and base
+  out "*{box-sizing:border-box;margin:0;padding:0}"
   out "html{font-size:16px;scroll-behavior:smooth}"
-  out "body{font-family:var(--font-sans);line-height:1.7;color:var(--text);background:var(--bg);transition:color var(--transition),background var(--transition);min-height:100vh}"
-  out ".container{max-width:var(--max-width);margin:0 auto;padding:var(--spacing-lg)}"
-  out ".page{display:flex;flex-direction:column;min-height:100vh}"
-  out "main{flex:1}"
-  out "h1,h2,h3{font-weight:600;line-height:1.3;margin:var(--spacing-lg) 0 var(--spacing-md)}"
-  out "h1{font-size:2rem}h2{font-size:1.5rem}h3{font-size:1.25rem}"
-  out "h1:first-child,h2:first-child{margin-top:0}"
+  out "body{font-family:var(--font-sans);line-height:1.8;color:var(--text);background:var(--bg);min-height:100vh}"
+  out ".container{max-width:var(--max-width);margin:0 auto;padding:var(--spacing-lg) var(--spacing-md)}"
+  -- Typography - Anemone style with # prefix
+  out "h1,h2,h3{font-family:var(--font-mono);font-weight:400;line-height:1.4;margin:var(--spacing-lg) 0 var(--spacing-md)}"
+  out "h1::before{content:'# ';color:var(--text-secondary)}"
+  out "h2::before{content:'# ';color:var(--text-secondary)}"
+  out "h3::before{content:'## ';color:var(--text-secondary)}"
+  out "h1{font-size:1.5rem}h2{font-size:1.25rem}h3{font-size:1.1rem}"
+  out "h1:first-child{margin-top:0}"
   out "p{margin-bottom:var(--spacing-md)}"
-  out "a{color:var(--accent);text-decoration:none;transition:color var(--transition)}"
-  out "a:hover{color:var(--accent-hover);text-decoration:underline}"
-  out "code{background:var(--bg-secondary);padding:.15em .4em;border-radius:var(--border-radius);font-family:var(--font-mono);font-size:.9em}"
-  out "ul,ol{margin:var(--spacing-md) 0;padding-left:var(--spacing-lg)}"
-  out "li{margin-bottom:.25rem}"
-  out "li::marker{color:var(--accent)}"
-  out "header{padding:var(--spacing-md) 0;border-bottom:1px solid var(--border);margin-bottom:var(--spacing-lg)}"
-  out "nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--spacing-md)}"
-  out ".site-title{font-size:1.25rem;font-weight:700;color:var(--text);text-decoration:none}"
-  out ".site-title:hover{color:var(--accent);text-decoration:none}"
-  out ".nav-links{display:flex;gap:var(--spacing-md);list-style:none;margin:0;padding:0}"
-  out ".nav-links a{color:var(--text-secondary)}"
-  out ".nav-links a:hover{color:var(--accent)}"
-  out "footer{padding:var(--spacing-lg) 0;border-top:1px solid var(--border);margin-top:2rem;color:var(--text-secondary);font-size:.875rem}"
-  out ".footer-content{display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--spacing-md)}"
-  out "article{margin-bottom:2rem}"
-  out ".btn{display:inline-flex;padding:.5rem 1rem;background:var(--accent);color:#fff;border:none;border-radius:var(--border-radius);font-weight:500;cursor:pointer;text-decoration:none;transition:background var(--transition)}"
-  out ".btn:hover{background:var(--accent-hover);text-decoration:none}"
-  out ".theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:2.5rem;height:2.5rem;background:transparent;border:1px solid var(--border);border-radius:50%;cursor:pointer}"
-  out ".theme-toggle:hover{border-color:var(--accent);background:var(--bg-secondary)}"
-  out ".theme-toggle svg{width:1.25rem;height:1.25rem;color:var(--text);fill:none;stroke:currentColor}"
+  -- Links - Anemone pink accent
+  out "a{color:var(--accent);text-decoration:none}"
+  out "a:hover{text-decoration:underline}"
+  -- Code
+  out "code{background:var(--bg-secondary);padding:.2em .4em;border-radius:3px;font-family:var(--font-mono);font-size:.9em}"
+  out "pre{background:var(--bg-secondary);padding:var(--spacing-md);border-radius:4px;overflow-x:auto;margin:var(--spacing-md) 0}"
+  out "pre code{background:none;padding:0}"
+  -- Lists - Anemone style with arrow markers
+  out "ul,ol{margin:var(--spacing-sm) 0;padding-left:var(--spacing-lg)}"
+  out "li{margin-bottom:.25rem;position:relative}"
+  out "ul{list-style:none;padding-left:1.5rem}"
+  out "ul>li::before{content:'»';position:absolute;left:-1.25rem;color:var(--text-secondary)}"
+  -- Blockquote - left border style
+  out "blockquote{border-left:3px solid var(--border);margin:var(--spacing-md) 0;padding:var(--spacing-sm) var(--spacing-md);color:var(--text-secondary);font-style:italic}"
+  -- Navigation - Anemone slash style
+  out "nav{text-align:center;padding:var(--spacing-md) 0;font-family:var(--font-mono);font-size:.9rem}"
+  out "nav a{color:var(--text-secondary);margin:0 .25rem}"
+  out "nav a:hover{color:var(--accent)}"
+  out "nav a.active{color:var(--accent)}"
+  out ".nav-sep{color:var(--text-secondary)}"
+  -- Footer - minimal
+  out "footer{margin-top:var(--spacing-lg);padding:var(--spacing-md) 0;border-top:1px solid var(--border);text-align:center;font-size:.875rem;color:var(--text-secondary)}"
+  out "footer a{color:var(--accent)}"
+  -- Theme toggle - sun/moon
+  out ".theme-toggle{position:fixed;top:var(--spacing-md);right:var(--spacing-md);background:none;border:none;cursor:pointer;font-size:1.25rem;opacity:.6}"
+  out ".theme-toggle:hover{opacity:1}"
+  -- Articles and sections
+  out "article{margin-bottom:var(--spacing-lg)}"
+  out "section{margin:var(--spacing-lg) 0}"
+  -- Tables - Anemone style
+  out "table{width:100%;border-collapse:collapse;margin:var(--spacing-md) 0;font-size:.9rem}"
+  out "th,td{padding:.5rem;text-align:left;border-bottom:1px solid var(--border)}"
+  out "th{font-weight:600;background:var(--bg-secondary)}"
+  -- Utilities
   out ".text-secondary{color:var(--text-secondary)}"
   out ".text-center{text-align:center}"
   out ".mt-lg{margin-top:var(--spacing-lg)}"
-  out "@media(max-width:640px){.container{padding:1rem}nav{flex-direction:column;align-items:flex-start}}"
+  out ".list-plain{list-style:none;padding-left:0}"
+  out ".list-plain li::before{content:none}"
+  -- Responsive
+  out "@media(max-width:640px){.container{padding:var(--spacing-md)}}"
   out "</style>"
 
 -- ============================================================================
@@ -64,50 +86,33 @@ fn render_head title
   out "<meta name=\"generator\" content=\"NERD CMS\">"
   out "<title>"
   out title
-  out " | NERD CMS</title>"
+  out " | nerd cms</title>"
   call render_css
 
 fn render_header
   out "</head>"
   out "<body>"
-  out "<div class=\"page\">"
   out "<div class=\"container\">"
-  out "<header>"
+  -- Anemone-style navigation with slashes
   out "<nav>"
-  out "<a href=\"/\" class=\"site-title\">🧠 NERD CMS</a>"
-  out "<ul class=\"nav-links\">"
-  out "<li><a href=\"/\">Home</a></li>"
-  out "<li><a href=\"/about\">About</a></li>"
-  out "<li><a href=\"/plugins\">Plugins</a></li>"
-  out "</ul>"
-  out "<button class=\"theme-toggle\" onclick=\"toggleTheme()\" aria-label=\"Toggle theme\">"
-  out "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" stroke-width=\"2\">"
-  out "<circle cx=\"12\" cy=\"12\" r=\"5\"></circle>"
-  out "<line x1=\"12\" y1=\"1\" x2=\"12\" y2=\"3\"></line>"
-  out "<line x1=\"12\" y1=\"21\" x2=\"12\" y2=\"23\"></line>"
-  out "<line x1=\"4.22\" y1=\"4.22\" x2=\"5.64\" y2=\"5.64\"></line>"
-  out "<line x1=\"18.36\" y1=\"18.36\" x2=\"19.78\" y2=\"19.78\"></line>"
-  out "<line x1=\"1\" y1=\"12\" x2=\"3\" y2=\"12\"></line>"
-  out "<line x1=\"21\" y1=\"12\" x2=\"23\" y2=\"12\"></line>"
-  out "</svg>"
-  out "</button>"
+  out "<a href=\"/\">/home/</a>"
+  out "<a href=\"/about\">/about/</a>"
+  out "<a href=\"/blog\">/blog/</a>"
+  out "<a href=\"/plugins\">/plugins/</a>"
+  out "☀"
   out "</nav>"
-  out "</header>"
   out "<main>"
 
 fn render_footer
   out "</main>"
   out "<footer>"
-  out "<div class=\"footer-content\">"
-  out "<span>© 2026 NERD CMS</span>"
-  out "<span>Powered by <a href=\"https://nerd-lang.org\">NERD</a> & Cloudflare Workers</span>"
-  out "</div>"
+  out "Made using <a href=\"https://nerd-lang.org\">nerd</a> cms"
   out "</footer>"
   out "</div>"
-  out "</div>"
+  out "<button class=\"theme-toggle\" onclick=\"toggleTheme()\" aria-label=\"Toggle theme\">☀</button>"
   out "<script>"
-  out "(function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();"
-  out "function toggleTheme(){var h=document.documentElement,c=h.getAttribute('data-theme')||'light',n=c==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('theme',n)}"
+  out "(function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.querySelector('.theme-toggle').textContent=t==='dark'?'☀':'❄'})();"
+  out "function toggleTheme(){var h=document.documentElement,c=h.getAttribute('data-theme')||'light',n=c==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.querySelector('.theme-toggle').textContent=n==='dark'?'☀':'❄'}"
   out "</script>"
   out "</body>"
   out "</html>"
@@ -120,22 +125,28 @@ fn render_home
   call render_head "Home"
   call render_header
   out "<article>"
-  out "<h1>Welcome to NERD CMS</h1>"
-  out "<p>A minimalist content management system powered by the <strong>NERD programming language</strong>, running on Cloudflare Workers via WebAssembly.</p>"
+  out "<h1>Overview</h1>"
+  out "<p>nerd cms is designed to provide a nearly no-JavaScript, efficient, and minimalist experience for your website. Embracing simplicity, the theme focuses on content and readability.</p>"
+  out "<blockquote>\"Simplicity is a prerequisite for reliability.\" — Rich Hickey</blockquote>"
   out "<h2>Features</h2>"
   out "<ul>"
-  out "<li>⚡ Lightning-fast edge computing</li>"
-  out "<li>🌙 Automatic dark/light theme</li>"
-  out "<li>📱 Fully responsive design</li>"
-  out "<li>🎨 Anemone-inspired aesthetics</li>"
-  out "<li>🔧 100% NERD — no JavaScript logic</li>"
+  out "<li>⚡ Edge computing on Cloudflare Workers</li>"
+  out "<li>🎨 Anemone-inspired minimalist theme</li>"
+  out "<li>🌙 Dark/light mode with system preference</li>"
+  out "<li>📝 Markdown content with KV storage</li>"
+  out "<li>🔧 100% NERD — minimal JavaScript</li>"
   out "</ul>"
-  out "<h2>NERD Output</h2>"
-  out "<p>This page is rendered entirely by NERD code compiled to WebAssembly:</p>"
-  out "<p><code>five plus three = "
-  out five plus three
-  out "</code></p>"
-  out "<p class=\"mt-lg\"><a href=\"/about\" class=\"btn\">Learn More</a></p>"
+  out "<h2>Blog Posts</h2>"
+  out "<p>Explore our content:</p>"
+  out "<ul>"
+  out "<li>📝 <a href=\"/blog/hello-world\">Hello World</a></li>"
+  out "<li>🧠 <a href=\"/blog/rich-hickey-principles\">Rich Hickey Principles</a></li>"
+  out "</ul>"
+  out "<h2>Links</h2>"
+  out "<ul>"
+  out "<li>Code: <a href=\"https://github.com/criticalinsight/nerd-cms\">GitHub</a></li>"
+  out "<li>Language: <a href=\"https://nerd-lang.org\">nerd-lang.org</a></li>"
+  out "</ul>"
   out "</article>"
   call render_footer
 
@@ -147,22 +158,21 @@ fn render_about
   call render_head "About"
   call render_header
   out "<article>"
-  out "<h1>About NERD CMS</h1>"
-  out "<p>NERD CMS is a content management system built with the <strong>NERD programming language</strong> and compiled to WebAssembly for deployment on Cloudflare Workers.</p>"
+  out "<h1>About</h1>"
+  out "<p>nerd cms is a content management system built with the <strong>NERD programming language</strong> and compiled to WebAssembly for deployment on Cloudflare Workers.</p>"
   out "<h2>Technology Stack</h2>"
   out "<ul>"
-  out "<li><a href=\"https://nerd-lang.org\">NERD Language</a> — Machine-authored intermediate language</li>"
-  out "<li><a href=\"https://webassembly.org\">WebAssembly</a> — Portable binary format</li>"
-  out "<li><a href=\"https://workers.cloudflare.com\">Cloudflare Workers</a> — Edge computing platform</li>"
+  out "<li>🔤 <a href=\"https://nerd-lang.org\">NERD</a> — Machine-authored intermediate language</li>"
+  out "<li>🔷 <a href=\"https://webassembly.org\">WebAssembly</a> — Portable binary format</li>"
+  out "<li>☁️ <a href=\"https://workers.cloudflare.com\">Cloudflare Workers</a> — Edge computing</li>"
   out "</ul>"
-  out "<h2>Architecture</h2>"
-  out "<p>The entire CMS is written in NERD:</p>"
+  out "<h2>Philosophy</h2>"
+  out "<p>Following Rich Hickey's principles:</p>"
   out "<ul>"
-  out "<li><code>cms.nerd</code> — Page rendering, routing, templates</li>"
-  out "<li><code>runtime_wasm.c</code> — Minimal runtime for Wasm I/O</li>"
-  out "<li><code>worker.js</code> — ~30 line bootloader (required by Cloudflare)</li>"
+  out "<li>Simple over easy</li>"
+  out "<li>Data over objects</li>"
+  out "<li>Composition over complection</li>"
   out "</ul>"
-  out "<p class=\"mt-lg\"><a href=\"https://github.com/criticalinsight/nerd-cms\" class=\"btn\">View on GitHub</a></p>"
   out "</article>"
   call render_footer
 
@@ -174,25 +184,25 @@ fn render_plugins
   call render_head "Plugins"
   call render_header
   out "<article>"
-  out "<h1>🔌 Plugins</h1>"
-  out "<p>NERD CMS plugin system — all implemented in NERD.</p>"
+  out "<h1>Plugins</h1>"
+  out "<p>nerd cms plugin system — all implemented in NERD.</p>"
   out "<h2>Built-in Plugins</h2>"
   out "<ul>"
-  out "<li><strong>Analytics</strong> — Request timing (hook: request_start/end)</li>"
-  out "<li><strong>SEO</strong> — Open Graph meta tags (hook: template_after)</li>"
-  out "<li><strong>Markdown</strong> — Content transformation (hook: content_transform)</li>"
-  out "<li><strong>Security</strong> — Response headers (hook: request_end)</li>"
+  out "<li>📊 <strong>Analytics</strong> — Request timing</li>"
+  out "<li>🔍 <strong>SEO</strong> — Open Graph meta tags</li>"
+  out "<li>📄 <strong>Markdown</strong> — Content transformation</li>"
+  out "<li>🔒 <strong>Security</strong> — Response headers</li>"
   out "</ul>"
   out "<h2>Available Hooks</h2>"
   out "<ul>"
   out "<li><code>request:start</code> — Before request processing</li>"
   out "<li><code>request:end</code> — After response is ready</li>"
-  out "<li><code>route:match</code> — When a route is matched</li>"
   out "<li><code>content:load</code> — When content is loaded</li>"
-  out "<li><code>content:transform</code> — Transform content before render</li>"
-  out "<li><code>template:before</code> — Before template render</li>"
   out "<li><code>template:after</code> — After template render</li>"
   out "</ul>"
+  out "<h2>API</h2>"
+  out "<p>Get plugins as JSON:</p>"
+  out "<pre><code>GET /api/plugins</code></pre>"
   out "</article>"
   call render_footer
 
@@ -205,8 +215,8 @@ fn render_404
   call render_header
   out "<article class=\"text-center\">"
   out "<h1>404</h1>"
-  out "<p class=\"text-secondary\">Page not found.</p>"
-  out "<p><a href=\"/\" class=\"btn\">Go Home</a></p>"
+  out "<p>Page not found.</p>"
+  out "<p><a href=\"/\">← back to home</a></p>"
   out "</article>"
   call render_footer
 
@@ -220,12 +230,8 @@ fn render_raw
   out five plus three
 
 -- ============================================================================
--- Router (uses runtime CMS functions)
+-- Main Entry Point
 -- ============================================================================
 
 fn main
-  -- Route based on request path (set by JS bootloader)
-  -- The runtime provides nerd_cms_route_eq and nerd_cms_route_starts
-  -- For now, we render home since NERD doesn't have extern calls yet
-  -- The JS bootloader will call different entry points based on path
   call render_home

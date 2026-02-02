@@ -31,10 +31,10 @@ This roadmap follows Rich Hickey's principles:
 
 | Feature | Description | Status |
 |---------|-------------|--------|
-| KV Storage | Cloudflare KV for content persistence | Planned |
-| Markdown | NERD-native markdown parser | Planned |
-| Frontmatter | YAML-like metadata in NERD syntax | Planned |
-| Content API | `GET /api/posts`, `GET /api/posts/:slug` | Planned |
+| KV Storage | Cloudflare KV for content persistence | ✅ Done |
+| Markdown | Markdown to HTML converter | ✅ Done |
+| Frontmatter | YAML-like metadata parsing | ✅ Done |
+| Content API | `GET/POST/DELETE /api/posts/:slug` | ✅ Done |
 
 **Design principle:** Content is immutable data. Edits create new versions.
 

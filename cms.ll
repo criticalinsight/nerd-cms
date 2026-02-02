@@ -62,272 +62,278 @@ declare void @nerd_json_free_string(i8*)
 @.fmt_int = private constant [6 x i8] c"%.0f\0A\00"
 
 @.str0 = private constant [8 x i8] c"<style>\00"
-@.str1 = private constant [319 x i8] c":root{--bg:#fafafa;--bg-secondary:#f0f0f0;--text:#1a1a1a;--text-secondary:#555;--accent:#6366f1;--accent-hover:#4f46e5;--border:#e0e0e0;--font-sans:system-ui,-apple-system,sans-serif;--font-mono:ui-monospace,monospace;--spacing-md:1rem;--spacing-lg:2rem;--max-width:42rem;--border-radius:.375rem;--transition:.2s ease}\00"
-@.str2 = private constant [175 x i8] c"@media(prefers-color-scheme:dark){:root{--bg:#0f0f0f;--bg-secondary:#1a1a1a;--text:#e5e5e5;--text-secondary:#a0a0a0;--accent:#818cf8;--accent-hover:#a5b4fc;--border:#2a2a2a}}\00"
-@.str3 = private constant [152 x i8] c"[data-theme=dark]{--bg:#0f0f0f;--bg-secondary:#1a1a1a;--text:#e5e5e5;--text-secondary:#a0a0a0;--accent:#818cf8;--accent-hover:#a5b4fc;--border:#2a2a2a}\00"
-@.str4 = private constant [150 x i8] c"[data-theme=light]{--bg:#fafafa;--bg-secondary:#f0f0f0;--text:#1a1a1a;--text-secondary:#555;--accent:#6366f1;--accent-hover:#4f46e5;--border:#e0e0e0}\00"
-@.str5 = private constant [61 x i8] c"*,::after,::before{box-sizing:border-box;margin:0;padding:0}\00"
+@.str1 = private constant [314 x i8] c":root{--bg:#f5f5f5;--bg-secondary:#e8e8e8;--text:#333;--text-secondary:#666;--accent:#e91e63;--accent-hover:#c2185b;--border:#ddd;--font-sans:'Segoe UI',system-ui,sans-serif;--font-mono:'JetBrains Mono','Fira Code',ui-monospace,monospace;--spacing-sm:.5rem;--spacing-md:1rem;--spacing-lg:1.5rem;--max-width:48rem}\00"
+@.str2 = private constant [169 x i8] c"@media(prefers-color-scheme:dark){:root{--bg:#1a1a1a;--bg-secondary:#252525;--text:#d4d4d4;--text-secondary:#888;--accent:#ff4081;--accent-hover:#ff80ab;--border:#333}}\00"
+@.str3 = private constant [146 x i8] c"[data-theme=dark]{--bg:#1a1a1a;--bg-secondary:#252525;--text:#d4d4d4;--text-secondary:#888;--accent:#ff4081;--accent-hover:#ff80ab;--border:#333}\00"
+@.str4 = private constant [144 x i8] c"[data-theme=light]{--bg:#f5f5f5;--bg-secondary:#e8e8e8;--text:#333;--text-secondary:#666;--accent:#e91e63;--accent-hover:#c2185b;--border:#ddd}\00"
+@.str5 = private constant [44 x i8] c"*{box-sizing:border-box;margin:0;padding:0}\00"
 @.str6 = private constant [44 x i8] c"html{font-size:16px;scroll-behavior:smooth}\00"
-@.str7 = private constant [171 x i8] c"body{font-family:var(--font-sans);line-height:1.7;color:var(--text);background:var(--bg);transition:color var(--transition),background var(--transition);min-height:100vh}\00"
-@.str8 = private constant [79 x i8] c".container{max-width:var(--max-width);margin:0 auto;padding:var(--spacing-lg)}\00"
-@.str9 = private constant [59 x i8] c".page{display:flex;flex-direction:column;min-height:100vh}\00"
-@.str10 = private constant [13 x i8] c"main{flex:1}\00"
-@.str11 = private constant [87 x i8] c"h1,h2,h3{font-weight:600;line-height:1.3;margin:var(--spacing-lg) 0 var(--spacing-md)}\00"
-@.str12 = private constant [60 x i8] c"h1{font-size:2rem}h2{font-size:1.5rem}h3{font-size:1.25rem}\00"
-@.str13 = private constant [44 x i8] c"h1:first-child,h2:first-child{margin-top:0}\00"
-@.str14 = private constant [35 x i8] c"p{margin-bottom:var(--spacing-md)}\00"
-@.str15 = private constant [79 x i8] c"a{color:var(--accent);text-decoration:none;transition:color var(--transition)}\00"
-@.str16 = private constant [61 x i8] c"a:hover{color:var(--accent-hover);text-decoration:underline}\00"
-@.str17 = private constant [135 x i8] c"code{background:var(--bg-secondary);padding:.15em .4em;border-radius:var(--border-radius);font-family:var(--font-mono);font-size:.9em}\00"
-@.str18 = private constant [65 x i8] c"ul,ol{margin:var(--spacing-md) 0;padding-left:var(--spacing-lg)}\00"
-@.str19 = private constant [25 x i8] c"li{margin-bottom:.25rem}\00"
-@.str20 = private constant [32 x i8] c"li::marker{color:var(--accent)}\00"
-@.str21 = private constant [106 x i8] c"header{padding:var(--spacing-md) 0;border-bottom:1px solid var(--border);margin-bottom:var(--spacing-lg)}\00"
-@.str22 = private constant [104 x i8] c"nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--spacing-md)}\00"
-@.str23 = private constant [86 x i8] c".site-title{font-size:1.25rem;font-weight:700;color:var(--text);text-decoration:none}\00"
-@.str24 = private constant [60 x i8] c".site-title:hover{color:var(--accent);text-decoration:none}\00"
-@.str25 = private constant [82 x i8] c".nav-links{display:flex;gap:var(--spacing-md);list-style:none;margin:0;padding:0}\00"
-@.str26 = private constant [42 x i8] c".nav-links a{color:var(--text-secondary)}\00"
-@.str27 = private constant [40 x i8] c".nav-links a:hover{color:var(--accent)}\00"
-@.str28 = private constant [133 x i8] c"footer{padding:var(--spacing-lg) 0;border-top:1px solid var(--border);margin-top:2rem;color:var(--text-secondary);font-size:.875rem}\00"
-@.str29 = private constant [97 x i8] c".footer-content{display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--spacing-md)}\00"
-@.str30 = private constant [28 x i8] c"article{margin-bottom:2rem}\00"
-@.str31 = private constant [220 x i8] c".btn{display:inline-flex;padding:.5rem 1rem;background:var(--accent);color:#fff;border:none;border-radius:var(--border-radius);font-weight:500;cursor:pointer;text-decoration:none;transition:background var(--transition)}\00"
-@.str32 = private constant [64 x i8] c".btn:hover{background:var(--accent-hover);text-decoration:none}\00"
-@.str33 = private constant [191 x i8] c".theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:2.5rem;height:2.5rem;background:transparent;border:1px solid var(--border);border-radius:50%;cursor:pointer}\00"
-@.str34 = private constant [79 x i8] c".theme-toggle:hover{border-color:var(--accent);background:var(--bg-secondary)}\00"
-@.str35 = private constant [96 x i8] c".theme-toggle svg{width:1.25rem;height:1.25rem;color:var(--text);fill:none;stroke:currentColor}\00"
-@.str36 = private constant [45 x i8] c".text-secondary{color:var(--text-secondary)}\00"
-@.str37 = private constant [32 x i8] c".text-center{text-align:center}\00"
-@.str38 = private constant [37 x i8] c".mt-lg{margin-top:var(--spacing-lg)}\00"
-@.str39 = private constant [99 x i8] c"@media(max-width:640px){.container{padding:1rem}nav{flex-direction:column;align-items:flex-start}}\00"
-@.str40 = private constant [9 x i8] c"</style>\00"
-@.str41 = private constant [16 x i8] c"<!DOCTYPE html>\00"
-@.str42 = private constant [17 x i8] c"<html lang=\22en\22>\00"
-@.str43 = private constant [7 x i8] c"<head>\00"
-@.str44 = private constant [23 x i8] c"<meta charset=\22UTF-8\22>\00"
-@.str45 = private constant [71 x i8] c"<meta name=\22viewport\22 content=\22width=device-width, initial-scale=1.0\22>\00"
-@.str46 = private constant [56 x i8] c"<meta name=\22description\22 content=\22Powered by NERD CMS\22>\00"
-@.str47 = private constant [43 x i8] c"<meta name=\22generator\22 content=\22NERD CMS\22>\00"
-@.str48 = private constant [8 x i8] c"<title>\00"
-@.str49 = private constant [20 x i8] c" | NERD CMS</title>\00"
-@.str50 = private constant [8 x i8] c"</head>\00"
-@.str51 = private constant [7 x i8] c"<body>\00"
-@.str52 = private constant [19 x i8] c"<div class=\22page\22>\00"
-@.str53 = private constant [24 x i8] c"<div class=\22container\22>\00"
-@.str54 = private constant [9 x i8] c"<header>\00"
-@.str55 = private constant [6 x i8] c"<nav>\00"
-@.str56 = private constant [49 x i8] c"<a href=\22/\22 class=\22site-title\22>\F0\9F\A7\A0 NERD CMS</a>\00"
-@.str57 = private constant [23 x i8] c"<ul class=\22nav-links\22>\00"
-@.str58 = private constant [30 x i8] c"<li><a href=\22/\22>Home</a></li>\00"
-@.str59 = private constant [36 x i8] c"<li><a href=\22/about\22>About</a></li>\00"
-@.str60 = private constant [40 x i8] c"<li><a href=\22/plugins\22>Plugins</a></li>\00"
-@.str61 = private constant [6 x i8] c"</ul>\00"
-@.str62 = private constant [80 x i8] c"<button class=\22theme-toggle\22 onclick=\22toggleTheme()\22 aria-label=\22Toggle theme\22>\00"
-@.str63 = private constant [78 x i8] c"<svg xmlns=\22http://www.w3.org/2000/svg\22 viewBox=\220 0 24 24\22 stroke-width=\222\22>\00"
-@.str64 = private constant [40 x i8] c"<circle cx=\2212\22 cy=\2212\22 r=\225\22></circle>\00"
-@.str65 = private constant [44 x i8] c"<line x1=\2212\22 y1=\221\22 x2=\2212\22 y2=\223\22></line>\00"
-@.str66 = private constant [46 x i8] c"<line x1=\2212\22 y1=\2221\22 x2=\2212\22 y2=\2223\22></line>\00"
-@.str67 = private constant [54 x i8] c"<line x1=\224.22\22 y1=\224.22\22 x2=\225.64\22 y2=\225.64\22></line>\00"
-@.str68 = private constant [58 x i8] c"<line x1=\2218.36\22 y1=\2218.36\22 x2=\2219.78\22 y2=\2219.78\22></line>\00"
-@.str69 = private constant [44 x i8] c"<line x1=\221\22 y1=\2212\22 x2=\223\22 y2=\2212\22></line>\00"
-@.str70 = private constant [46 x i8] c"<line x1=\2221\22 y1=\2212\22 x2=\2223\22 y2=\2212\22></line>\00"
-@.str71 = private constant [7 x i8] c"</svg>\00"
-@.str72 = private constant [10 x i8] c"</button>\00"
-@.str73 = private constant [7 x i8] c"</nav>\00"
-@.str74 = private constant [10 x i8] c"</header>\00"
-@.str75 = private constant [7 x i8] c"<main>\00"
-@.str76 = private constant [8 x i8] c"</main>\00"
-@.str77 = private constant [9 x i8] c"<footer>\00"
-@.str78 = private constant [29 x i8] c"<div class=\22footer-content\22>\00"
-@.str79 = private constant [30 x i8] c"<span>\C2\A9 2026 NERD CMS</span>\00"
-@.str80 = private constant [86 x i8] c"<span>Powered by <a href=\22https://nerd-lang.org\22>NERD</a> & Cloudflare Workers</span>\00"
-@.str81 = private constant [7 x i8] c"</div>\00"
-@.str82 = private constant [10 x i8] c"</footer>\00"
-@.str83 = private constant [7 x i8] c"</div>\00"
-@.str84 = private constant [7 x i8] c"</div>\00"
-@.str85 = private constant [9 x i8] c"<script>\00"
-@.str86 = private constant [182 x i8] c"(function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();\00"
-@.str87 = private constant [186 x i8] c"function toggleTheme(){var h=document.documentElement,c=h.getAttribute('data-theme')||'light',n=c==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('theme',n)}\00"
-@.str88 = private constant [10 x i8] c"</script>\00"
-@.str89 = private constant [8 x i8] c"</body>\00"
-@.str90 = private constant [8 x i8] c"</html>\00"
-@.str91 = private constant [5 x i8] c"Home\00"
-@.str92 = private constant [10 x i8] c"<article>\00"
-@.str93 = private constant [29 x i8] c"<h1>Welcome to NERD CMS</h1>\00"
-@.str94 = private constant [152 x i8] c"<p>A minimalist content management system powered by the <strong>NERD programming language</strong>, running on Cloudflare Workers via WebAssembly.</p>\00"
-@.str95 = private constant [18 x i8] c"<h2>Features</h2>\00"
-@.str96 = private constant [5 x i8] c"<ul>\00"
-@.str97 = private constant [43 x i8] c"<li>\E2\9A\A1 Lightning-fast edge computing</li>\00"
-@.str98 = private constant [41 x i8] c"<li>\F0\9F\8C\99 Automatic dark/light theme</li>\00"
-@.str99 = private constant [38 x i8] c"<li>\F0\9F\93\B1 Fully responsive design</li>\00"
-@.str100 = private constant [42 x i8] c"<li>\F0\9F\8E\A8 Anemone-inspired aesthetics</li>\00"
-@.str101 = private constant [48 x i8] c"<li>\F0\9F\94\A7 100% NERD \E2\80\94 no JavaScript logic</li>\00"
+@.str7 = private constant [107 x i8] c"body{font-family:var(--font-sans);line-height:1.8;color:var(--text);background:var(--bg);min-height:100vh}\00"
+@.str8 = private constant [97 x i8] c".container{max-width:var(--max-width);margin:0 auto;padding:var(--spacing-lg) var(--spacing-md)}\00"
+@.str9 = private constant [116 x i8] c"h1,h2,h3{font-family:var(--font-mono);font-weight:400;line-height:1.4;margin:var(--spacing-lg) 0 var(--spacing-md)}\00"
+@.str10 = private constant [53 x i8] c"h1::before{content:'# ';color:var(--text-secondary)}\00"
+@.str11 = private constant [53 x i8] c"h2::before{content:'# ';color:var(--text-secondary)}\00"
+@.str12 = private constant [54 x i8] c"h3::before{content:'## ';color:var(--text-secondary)}\00"
+@.str13 = private constant [62 x i8] c"h1{font-size:1.5rem}h2{font-size:1.25rem}h3{font-size:1.1rem}\00"
+@.str14 = private constant [29 x i8] c"h1:first-child{margin-top:0}\00"
+@.str15 = private constant [35 x i8] c"p{margin-bottom:var(--spacing-md)}\00"
+@.str16 = private constant [44 x i8] c"a{color:var(--accent);text-decoration:none}\00"
+@.str17 = private constant [35 x i8] c"a:hover{text-decoration:underline}\00"
+@.str18 = private constant [117 x i8] c"code{background:var(--bg-secondary);padding:.2em .4em;border-radius:3px;font-family:var(--font-mono);font-size:.9em}\00"
+@.str19 = private constant [123 x i8] c"pre{background:var(--bg-secondary);padding:var(--spacing-md);border-radius:4px;overflow-x:auto;margin:var(--spacing-md) 0}\00"
+@.str20 = private constant [36 x i8] c"pre code{background:none;padding:0}\00"
+@.str21 = private constant [65 x i8] c"ul,ol{margin:var(--spacing-sm) 0;padding-left:var(--spacing-lg)}\00"
+@.str22 = private constant [43 x i8] c"li{margin-bottom:.25rem;position:relative}\00"
+@.str23 = private constant [40 x i8] c"ul{list-style:none;padding-left:1.5rem}\00"
+@.str24 = private constant [88 x i8] c"ul>li::before{content:'\C2\BB';position:absolute;left:-1.25rem;color:var(--text-secondary)}\00"
+@.str25 = private constant [165 x i8] c"blockquote{border-left:3px solid var(--border);margin:var(--spacing-md) 0;padding:var(--spacing-sm) var(--spacing-md);color:var(--text-secondary);font-style:italic}\00"
+@.str26 = private constant [96 x i8] c"nav{text-align:center;padding:var(--spacing-md) 0;font-family:var(--font-mono);font-size:.9rem}\00"
+@.str27 = private constant [51 x i8] c"nav a{color:var(--text-secondary);margin:0 .25rem}\00"
+@.str28 = private constant [33 x i8] c"nav a:hover{color:var(--accent)}\00"
+@.str29 = private constant [34 x i8] c"nav a.active{color:var(--accent)}\00"
+@.str30 = private constant [38 x i8] c".nav-sep{color:var(--text-secondary)}\00"
+@.str31 = private constant [164 x i8] c"footer{margin-top:var(--spacing-lg);padding:var(--spacing-md) 0;border-top:1px solid var(--border);text-align:center;font-size:.875rem;color:var(--text-secondary)}\00"
+@.str32 = private constant [30 x i8] c"footer a{color:var(--accent)}\00"
+@.str33 = private constant [148 x i8] c".theme-toggle{position:fixed;top:var(--spacing-md);right:var(--spacing-md);background:none;border:none;cursor:pointer;font-size:1.25rem;opacity:.6}\00"
+@.str34 = private constant [31 x i8] c".theme-toggle:hover{opacity:1}\00"
+@.str35 = private constant [41 x i8] c"article{margin-bottom:var(--spacing-lg)}\00"
+@.str36 = private constant [36 x i8] c"section{margin:var(--spacing-lg) 0}\00"
+@.str37 = private constant [86 x i8] c"table{width:100%;border-collapse:collapse;margin:var(--spacing-md) 0;font-size:.9rem}\00"
+@.str38 = private constant [75 x i8] c"th,td{padding:.5rem;text-align:left;border-bottom:1px solid var(--border)}\00"
+@.str39 = private constant [51 x i8] c"th{font-weight:600;background:var(--bg-secondary)}\00"
+@.str40 = private constant [45 x i8] c".text-secondary{color:var(--text-secondary)}\00"
+@.str41 = private constant [32 x i8] c".text-center{text-align:center}\00"
+@.str42 = private constant [37 x i8] c".mt-lg{margin-top:var(--spacing-lg)}\00"
+@.str43 = private constant [44 x i8] c".list-plain{list-style:none;padding-left:0}\00"
+@.str44 = private constant [37 x i8] c".list-plain li::before{content:none}\00"
+@.str45 = private constant [63 x i8] c"@media(max-width:640px){.container{padding:var(--spacing-md)}}\00"
+@.str46 = private constant [9 x i8] c"</style>\00"
+@.str47 = private constant [16 x i8] c"<!DOCTYPE html>\00"
+@.str48 = private constant [17 x i8] c"<html lang=\22en\22>\00"
+@.str49 = private constant [7 x i8] c"<head>\00"
+@.str50 = private constant [23 x i8] c"<meta charset=\22UTF-8\22>\00"
+@.str51 = private constant [71 x i8] c"<meta name=\22viewport\22 content=\22width=device-width, initial-scale=1.0\22>\00"
+@.str52 = private constant [56 x i8] c"<meta name=\22description\22 content=\22Powered by NERD CMS\22>\00"
+@.str53 = private constant [43 x i8] c"<meta name=\22generator\22 content=\22NERD CMS\22>\00"
+@.str54 = private constant [8 x i8] c"<title>\00"
+@.str55 = private constant [20 x i8] c" | nerd cms</title>\00"
+@.str56 = private constant [8 x i8] c"</head>\00"
+@.str57 = private constant [7 x i8] c"<body>\00"
+@.str58 = private constant [24 x i8] c"<div class=\22container\22>\00"
+@.str59 = private constant [6 x i8] c"<nav>\00"
+@.str60 = private constant [23 x i8] c"<a href=\22/\22>/home/</a>\00"
+@.str61 = private constant [29 x i8] c"<a href=\22/about\22>/about/</a>\00"
+@.str62 = private constant [27 x i8] c"<a href=\22/blog\22>/blog/</a>\00"
+@.str63 = private constant [33 x i8] c"<a href=\22/plugins\22>/plugins/</a>\00"
+@.str64 = private constant [4 x i8] c"\E2\98\80\00"
+@.str65 = private constant [7 x i8] c"</nav>\00"
+@.str66 = private constant [7 x i8] c"<main>\00"
+@.str67 = private constant [8 x i8] c"</main>\00"
+@.str68 = private constant [9 x i8] c"<footer>\00"
+@.str69 = private constant [56 x i8] c"Made using <a href=\22https://nerd-lang.org\22>nerd</a> cms\00"
+@.str70 = private constant [10 x i8] c"</footer>\00"
+@.str71 = private constant [7 x i8] c"</div>\00"
+@.str72 = private constant [92 x i8] c"<button class=\22theme-toggle\22 onclick=\22toggleTheme()\22 aria-label=\22Toggle theme\22>\E2\98\80</button>\00"
+@.str73 = private constant [9 x i8] c"<script>\00"
+@.str74 = private constant [257 x i8] c"(function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.querySelector('.theme-toggle').textContent=t==='dark'?'\E2\98\80':'\E2\9D\84'})();\00"
+@.str75 = private constant [261 x i8] c"function toggleTheme(){var h=document.documentElement,c=h.getAttribute('data-theme')||'light',n=c==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.querySelector('.theme-toggle').textContent=n==='dark'?'\E2\98\80':'\E2\9D\84'}\00"
+@.str76 = private constant [10 x i8] c"</script>\00"
+@.str77 = private constant [8 x i8] c"</body>\00"
+@.str78 = private constant [8 x i8] c"</html>\00"
+@.str79 = private constant [5 x i8] c"Home\00"
+@.str80 = private constant [10 x i8] c"<article>\00"
+@.str81 = private constant [18 x i8] c"<h1>Overview</h1>\00"
+@.str82 = private constant [186 x i8] c"<p>nerd cms is designed to provide a nearly no-JavaScript, efficient, and minimalist experience for your website. Embracing simplicity, the theme focuses on content and readability.</p>\00"
+@.str83 = private constant [89 x i8] c"<blockquote>\22Simplicity is a prerequisite for reliability.\22 \E2\80\94 Rich Hickey</blockquote>\00"
+@.str84 = private constant [18 x i8] c"<h2>Features</h2>\00"
+@.str85 = private constant [5 x i8] c"<ul>\00"
+@.str86 = private constant [50 x i8] c"<li>\E2\9A\A1 Edge computing on Cloudflare Workers</li>\00"
+@.str87 = private constant [48 x i8] c"<li>\F0\9F\8E\A8 Anemone-inspired minimalist theme</li>\00"
+@.str88 = private constant [53 x i8] c"<li>\F0\9F\8C\99 Dark/light mode with system preference</li>\00"
+@.str89 = private constant [47 x i8] c"<li>\F0\9F\93\9D Markdown content with KV storage</li>\00"
+@.str90 = private constant [47 x i8] c"<li>\F0\9F\94\A7 100% NERD \E2\80\94 minimal JavaScript</li>\00"
+@.str91 = private constant [6 x i8] c"</ul>\00"
+@.str92 = private constant [20 x i8] c"<h2>Blog Posts</h2>\00"
+@.str93 = private constant [28 x i8] c"<p>Explore our content:</p>\00"
+@.str94 = private constant [5 x i8] c"<ul>\00"
+@.str95 = private constant [58 x i8] c"<li>\F0\9F\93\9D <a href=\22/blog/hello-world\22>Hello World</a></li>\00"
+@.str96 = private constant [80 x i8] c"<li>\F0\9F\A7\A0 <a href=\22/blog/rich-hickey-principles\22>Rich Hickey Principles</a></li>\00"
+@.str97 = private constant [6 x i8] c"</ul>\00"
+@.str98 = private constant [15 x i8] c"<h2>Links</h2>\00"
+@.str99 = private constant [5 x i8] c"<ul>\00"
+@.str100 = private constant [80 x i8] c"<li>Code: <a href=\22https://github.com/criticalinsight/nerd-cms\22>GitHub</a></li>\00"
+@.str101 = private constant [69 x i8] c"<li>Language: <a href=\22https://nerd-lang.org\22>nerd-lang.org</a></li>\00"
 @.str102 = private constant [6 x i8] c"</ul>\00"
-@.str103 = private constant [21 x i8] c"<h2>NERD Output</h2>\00"
-@.str104 = private constant [76 x i8] c"<p>This page is rendered entirely by NERD code compiled to WebAssembly:</p>\00"
-@.str105 = private constant [28 x i8] c"<p><code>five plus three = \00"
-@.str106 = private constant [12 x i8] c"</code></p>\00"
-@.str107 = private constant [65 x i8] c"<p class=\22mt-lg\22><a href=\22/about\22 class=\22btn\22>Learn More</a></p>\00"
-@.str108 = private constant [11 x i8] c"</article>\00"
-@.str109 = private constant [6 x i8] c"About\00"
-@.str110 = private constant [10 x i8] c"<article>\00"
-@.str111 = private constant [24 x i8] c"<h1>About NERD CMS</h1>\00"
-@.str112 = private constant [171 x i8] c"<p>NERD CMS is a content management system built with the <strong>NERD programming language</strong> and compiled to WebAssembly for deployment on Cloudflare Workers.</p>\00"
-@.str113 = private constant [26 x i8] c"<h2>Technology Stack</h2>\00"
-@.str114 = private constant [5 x i8] c"<ul>\00"
-@.str115 = private constant [102 x i8] c"<li><a href=\22https://nerd-lang.org\22>NERD Language</a> \E2\80\94 Machine-authored intermediate language</li>\00"
-@.str116 = private constant [86 x i8] c"<li><a href=\22https://webassembly.org\22>WebAssembly</a> \E2\80\94 Portable binary format</li>\00"
-@.str117 = private constant [101 x i8] c"<li><a href=\22https://workers.cloudflare.com\22>Cloudflare Workers</a> \E2\80\94 Edge computing platform</li>\00"
-@.str118 = private constant [6 x i8] c"</ul>\00"
-@.str119 = private constant [22 x i8] c"<h2>Architecture</h2>\00"
-@.str120 = private constant [42 x i8] c"<p>The entire CMS is written in NERD:</p>\00"
-@.str121 = private constant [5 x i8] c"<ul>\00"
-@.str122 = private constant [70 x i8] c"<li><code>cms.nerd</code> \E2\80\94 Page rendering, routing, templates</li>\00"
-@.str123 = private constant [70 x i8] c"<li><code>runtime_wasm.c</code> \E2\80\94 Minimal runtime for Wasm I/O</li>\00"
-@.str124 = private constant [81 x i8] c"<li><code>worker.js</code> \E2\80\94 ~30 line bootloader (required by Cloudflare)</li>\00"
-@.str125 = private constant [6 x i8] c"</ul>\00"
-@.str126 = private constant [106 x i8] c"<p class=\22mt-lg\22><a href=\22https://github.com/criticalinsight/nerd-cms\22 class=\22btn\22>View on GitHub</a></p>\00"
-@.str127 = private constant [11 x i8] c"</article>\00"
-@.str128 = private constant [8 x i8] c"Plugins\00"
-@.str129 = private constant [10 x i8] c"<article>\00"
-@.str130 = private constant [22 x i8] c"<h1>\F0\9F\94\8C Plugins</h1>\00"
-@.str131 = private constant [59 x i8] c"<p>NERD CMS plugin system \E2\80\94 all implemented in NERD.</p>\00"
-@.str132 = private constant [26 x i8] c"<h2>Built-in Plugins</h2>\00"
-@.str133 = private constant [5 x i8] c"<ul>\00"
-@.str134 = private constant [81 x i8] c"<li><strong>Analytics</strong> \E2\80\94 Request timing (hook: request_start/end)</li>\00"
-@.str135 = private constant [78 x i8] c"<li><strong>SEO</strong> \E2\80\94 Open Graph meta tags (hook: template_after)</li>\00"
-@.str136 = private constant [88 x i8] c"<li><strong>Markdown</strong> \E2\80\94 Content transformation (hook: content_transform)</li>\00"
-@.str137 = private constant [76 x i8] c"<li><strong>Security</strong> \E2\80\94 Response headers (hook: request_end)</li>\00"
-@.str138 = private constant [6 x i8] c"</ul>\00"
-@.str139 = private constant [25 x i8] c"<h2>Available Hooks</h2>\00"
-@.str140 = private constant [5 x i8] c"<ul>\00"
-@.str141 = private constant [66 x i8] c"<li><code>request:start</code> \E2\80\94 Before request processing</li>\00"
-@.str142 = private constant [62 x i8] c"<li><code>request:end</code> \E2\80\94 After response is ready</li>\00"
-@.str143 = private constant [62 x i8] c"<li><code>route:match</code> \E2\80\94 When a route is matched</li>\00"
-@.str144 = private constant [62 x i8] c"<li><code>content:load</code> \E2\80\94 When content is loaded</li>\00"
-@.str145 = private constant [76 x i8] c"<li><code>content:transform</code> \E2\80\94 Transform content before render</li>\00"
-@.str146 = private constant [65 x i8] c"<li><code>template:before</code> \E2\80\94 Before template render</li>\00"
-@.str147 = private constant [63 x i8] c"<li><code>template:after</code> \E2\80\94 After template render</li>\00"
-@.str148 = private constant [6 x i8] c"</ul>\00"
+@.str103 = private constant [11 x i8] c"</article>\00"
+@.str104 = private constant [6 x i8] c"About\00"
+@.str105 = private constant [10 x i8] c"<article>\00"
+@.str106 = private constant [15 x i8] c"<h1>About</h1>\00"
+@.str107 = private constant [171 x i8] c"<p>nerd cms is a content management system built with the <strong>NERD programming language</strong> and compiled to WebAssembly for deployment on Cloudflare Workers.</p>\00"
+@.str108 = private constant [26 x i8] c"<h2>Technology Stack</h2>\00"
+@.str109 = private constant [5 x i8] c"<ul>\00"
+@.str110 = private constant [98 x i8] c"<li>\F0\9F\94\A4 <a href=\22https://nerd-lang.org\22>NERD</a> \E2\80\94 Machine-authored intermediate language</li>\00"
+@.str111 = private constant [91 x i8] c"<li>\F0\9F\94\B7 <a href=\22https://webassembly.org\22>WebAssembly</a> \E2\80\94 Portable binary format</li>\00"
+@.str112 = private constant [99 x i8] c"<li>\E2\98\81\EF\B8\8F <a href=\22https://workers.cloudflare.com\22>Cloudflare Workers</a> \E2\80\94 Edge computing</li>\00"
+@.str113 = private constant [6 x i8] c"</ul>\00"
+@.str114 = private constant [20 x i8] c"<h2>Philosophy</h2>\00"
+@.str115 = private constant [43 x i8] c"<p>Following Rich Hickey's principles:</p>\00"
+@.str116 = private constant [5 x i8] c"<ul>\00"
+@.str117 = private constant [26 x i8] c"<li>Simple over easy</li>\00"
+@.str118 = private constant [27 x i8] c"<li>Data over objects</li>\00"
+@.str119 = private constant [38 x i8] c"<li>Composition over complection</li>\00"
+@.str120 = private constant [6 x i8] c"</ul>\00"
+@.str121 = private constant [11 x i8] c"</article>\00"
+@.str122 = private constant [8 x i8] c"Plugins\00"
+@.str123 = private constant [10 x i8] c"<article>\00"
+@.str124 = private constant [17 x i8] c"<h1>Plugins</h1>\00"
+@.str125 = private constant [59 x i8] c"<p>nerd cms plugin system \E2\80\94 all implemented in NERD.</p>\00"
+@.str126 = private constant [26 x i8] c"<h2>Built-in Plugins</h2>\00"
+@.str127 = private constant [5 x i8] c"<ul>\00"
+@.str128 = private constant [60 x i8] c"<li>\F0\9F\93\8A <strong>Analytics</strong> \E2\80\94 Request timing</li>\00"
+@.str129 = private constant [60 x i8] c"<li>\F0\9F\94\8D <strong>SEO</strong> \E2\80\94 Open Graph meta tags</li>\00"
+@.str130 = private constant [67 x i8] c"<li>\F0\9F\93\84 <strong>Markdown</strong> \E2\80\94 Content transformation</li>\00"
+@.str131 = private constant [61 x i8] c"<li>\F0\9F\94\92 <strong>Security</strong> \E2\80\94 Response headers</li>\00"
+@.str132 = private constant [6 x i8] c"</ul>\00"
+@.str133 = private constant [25 x i8] c"<h2>Available Hooks</h2>\00"
+@.str134 = private constant [5 x i8] c"<ul>\00"
+@.str135 = private constant [66 x i8] c"<li><code>request:start</code> \E2\80\94 Before request processing</li>\00"
+@.str136 = private constant [62 x i8] c"<li><code>request:end</code> \E2\80\94 After response is ready</li>\00"
+@.str137 = private constant [62 x i8] c"<li><code>content:load</code> \E2\80\94 When content is loaded</li>\00"
+@.str138 = private constant [63 x i8] c"<li><code>template:after</code> \E2\80\94 After template render</li>\00"
+@.str139 = private constant [6 x i8] c"</ul>\00"
+@.str140 = private constant [13 x i8] c"<h2>API</h2>\00"
+@.str141 = private constant [28 x i8] c"<p>Get plugins as JSON:</p>\00"
+@.str142 = private constant [41 x i8] c"<pre><code>GET /api/plugins</code></pre>\00"
+@.str143 = private constant [11 x i8] c"</article>\00"
+@.str144 = private constant [10 x i8] c"Not Found\00"
+@.str145 = private constant [30 x i8] c"<article class=\22text-center\22>\00"
+@.str146 = private constant [13 x i8] c"<h1>404</h1>\00"
+@.str147 = private constant [23 x i8] c"<p>Page not found.</p>\00"
+@.str148 = private constant [40 x i8] c"<p><a href=\22/\22>\E2\86\90 back to home</a></p>\00"
 @.str149 = private constant [11 x i8] c"</article>\00"
-@.str150 = private constant [10 x i8] c"Not Found\00"
-@.str151 = private constant [30 x i8] c"<article class=\22text-center\22>\00"
-@.str152 = private constant [13 x i8] c"<h1>404</h1>\00"
-@.str153 = private constant [46 x i8] c"<p class=\22text-secondary\22>Page not found.</p>\00"
-@.str154 = private constant [43 x i8] c"<p><a href=\22/\22 class=\22btn\22>Go Home</a></p>\00"
-@.str155 = private constant [11 x i8] c"</article>\00"
-@.str156 = private constant [9 x i8] c"NERD CMS\00"
-@.str157 = private constant [36 x i8] c"Powered by No Effort Required, Done\00"
+@.str150 = private constant [9 x i8] c"NERD CMS\00"
+@.str151 = private constant [36 x i8] c"Powered by No Effort Required, Done\00"
 
 define double @render_css() {
 entry:
   %t0 = getelementptr [8 x i8], [8 x i8]* @.str0, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t0)
-  %t1 = getelementptr [319 x i8], [319 x i8]* @.str1, i32 0, i32 0
+  %t1 = getelementptr [314 x i8], [314 x i8]* @.str1, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t1)
-  %t2 = getelementptr [175 x i8], [175 x i8]* @.str2, i32 0, i32 0
+  %t2 = getelementptr [169 x i8], [169 x i8]* @.str2, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t2)
-  %t3 = getelementptr [152 x i8], [152 x i8]* @.str3, i32 0, i32 0
+  %t3 = getelementptr [146 x i8], [146 x i8]* @.str3, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t3)
-  %t4 = getelementptr [150 x i8], [150 x i8]* @.str4, i32 0, i32 0
+  %t4 = getelementptr [144 x i8], [144 x i8]* @.str4, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t4)
-  %t5 = getelementptr [61 x i8], [61 x i8]* @.str5, i32 0, i32 0
+  %t5 = getelementptr [44 x i8], [44 x i8]* @.str5, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t5)
   %t6 = getelementptr [44 x i8], [44 x i8]* @.str6, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t6)
-  %t7 = getelementptr [171 x i8], [171 x i8]* @.str7, i32 0, i32 0
+  %t7 = getelementptr [107 x i8], [107 x i8]* @.str7, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t7)
-  %t8 = getelementptr [79 x i8], [79 x i8]* @.str8, i32 0, i32 0
+  %t8 = getelementptr [97 x i8], [97 x i8]* @.str8, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t8)
-  %t9 = getelementptr [59 x i8], [59 x i8]* @.str9, i32 0, i32 0
+  %t9 = getelementptr [116 x i8], [116 x i8]* @.str9, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t9)
-  %t10 = getelementptr [13 x i8], [13 x i8]* @.str10, i32 0, i32 0
+  %t10 = getelementptr [53 x i8], [53 x i8]* @.str10, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t10)
-  %t11 = getelementptr [87 x i8], [87 x i8]* @.str11, i32 0, i32 0
+  %t11 = getelementptr [53 x i8], [53 x i8]* @.str11, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t11)
-  %t12 = getelementptr [60 x i8], [60 x i8]* @.str12, i32 0, i32 0
+  %t12 = getelementptr [54 x i8], [54 x i8]* @.str12, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t12)
-  %t13 = getelementptr [44 x i8], [44 x i8]* @.str13, i32 0, i32 0
+  %t13 = getelementptr [62 x i8], [62 x i8]* @.str13, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t13)
-  %t14 = getelementptr [35 x i8], [35 x i8]* @.str14, i32 0, i32 0
+  %t14 = getelementptr [29 x i8], [29 x i8]* @.str14, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t14)
-  %t15 = getelementptr [79 x i8], [79 x i8]* @.str15, i32 0, i32 0
+  %t15 = getelementptr [35 x i8], [35 x i8]* @.str15, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t15)
-  %t16 = getelementptr [61 x i8], [61 x i8]* @.str16, i32 0, i32 0
+  %t16 = getelementptr [44 x i8], [44 x i8]* @.str16, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t16)
-  %t17 = getelementptr [135 x i8], [135 x i8]* @.str17, i32 0, i32 0
+  %t17 = getelementptr [35 x i8], [35 x i8]* @.str17, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t17)
-  %t18 = getelementptr [65 x i8], [65 x i8]* @.str18, i32 0, i32 0
+  %t18 = getelementptr [117 x i8], [117 x i8]* @.str18, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t18)
-  %t19 = getelementptr [25 x i8], [25 x i8]* @.str19, i32 0, i32 0
+  %t19 = getelementptr [123 x i8], [123 x i8]* @.str19, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t19)
-  %t20 = getelementptr [32 x i8], [32 x i8]* @.str20, i32 0, i32 0
+  %t20 = getelementptr [36 x i8], [36 x i8]* @.str20, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t20)
-  %t21 = getelementptr [106 x i8], [106 x i8]* @.str21, i32 0, i32 0
+  %t21 = getelementptr [65 x i8], [65 x i8]* @.str21, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t21)
-  %t22 = getelementptr [104 x i8], [104 x i8]* @.str22, i32 0, i32 0
+  %t22 = getelementptr [43 x i8], [43 x i8]* @.str22, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t22)
-  %t23 = getelementptr [86 x i8], [86 x i8]* @.str23, i32 0, i32 0
+  %t23 = getelementptr [40 x i8], [40 x i8]* @.str23, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t23)
-  %t24 = getelementptr [60 x i8], [60 x i8]* @.str24, i32 0, i32 0
+  %t24 = getelementptr [88 x i8], [88 x i8]* @.str24, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t24)
-  %t25 = getelementptr [82 x i8], [82 x i8]* @.str25, i32 0, i32 0
+  %t25 = getelementptr [165 x i8], [165 x i8]* @.str25, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t25)
-  %t26 = getelementptr [42 x i8], [42 x i8]* @.str26, i32 0, i32 0
+  %t26 = getelementptr [96 x i8], [96 x i8]* @.str26, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t26)
-  %t27 = getelementptr [40 x i8], [40 x i8]* @.str27, i32 0, i32 0
+  %t27 = getelementptr [51 x i8], [51 x i8]* @.str27, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t27)
-  %t28 = getelementptr [133 x i8], [133 x i8]* @.str28, i32 0, i32 0
+  %t28 = getelementptr [33 x i8], [33 x i8]* @.str28, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t28)
-  %t29 = getelementptr [97 x i8], [97 x i8]* @.str29, i32 0, i32 0
+  %t29 = getelementptr [34 x i8], [34 x i8]* @.str29, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t29)
-  %t30 = getelementptr [28 x i8], [28 x i8]* @.str30, i32 0, i32 0
+  %t30 = getelementptr [38 x i8], [38 x i8]* @.str30, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t30)
-  %t31 = getelementptr [220 x i8], [220 x i8]* @.str31, i32 0, i32 0
+  %t31 = getelementptr [164 x i8], [164 x i8]* @.str31, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t31)
-  %t32 = getelementptr [64 x i8], [64 x i8]* @.str32, i32 0, i32 0
+  %t32 = getelementptr [30 x i8], [30 x i8]* @.str32, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t32)
-  %t33 = getelementptr [191 x i8], [191 x i8]* @.str33, i32 0, i32 0
+  %t33 = getelementptr [148 x i8], [148 x i8]* @.str33, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t33)
-  %t34 = getelementptr [79 x i8], [79 x i8]* @.str34, i32 0, i32 0
+  %t34 = getelementptr [31 x i8], [31 x i8]* @.str34, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t34)
-  %t35 = getelementptr [96 x i8], [96 x i8]* @.str35, i32 0, i32 0
+  %t35 = getelementptr [41 x i8], [41 x i8]* @.str35, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t35)
-  %t36 = getelementptr [45 x i8], [45 x i8]* @.str36, i32 0, i32 0
+  %t36 = getelementptr [36 x i8], [36 x i8]* @.str36, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t36)
-  %t37 = getelementptr [32 x i8], [32 x i8]* @.str37, i32 0, i32 0
+  %t37 = getelementptr [86 x i8], [86 x i8]* @.str37, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t37)
-  %t38 = getelementptr [37 x i8], [37 x i8]* @.str38, i32 0, i32 0
+  %t38 = getelementptr [75 x i8], [75 x i8]* @.str38, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t38)
-  %t39 = getelementptr [99 x i8], [99 x i8]* @.str39, i32 0, i32 0
+  %t39 = getelementptr [51 x i8], [51 x i8]* @.str39, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t39)
-  %t40 = getelementptr [9 x i8], [9 x i8]* @.str40, i32 0, i32 0
+  %t40 = getelementptr [45 x i8], [45 x i8]* @.str40, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t40)
+  %t41 = getelementptr [32 x i8], [32 x i8]* @.str41, i32 0, i32 0
+  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t41)
+  %t42 = getelementptr [37 x i8], [37 x i8]* @.str42, i32 0, i32 0
+  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t42)
+  %t43 = getelementptr [44 x i8], [44 x i8]* @.str43, i32 0, i32 0
+  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t43)
+  %t44 = getelementptr [37 x i8], [37 x i8]* @.str44, i32 0, i32 0
+  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t44)
+  %t45 = getelementptr [63 x i8], [63 x i8]* @.str45, i32 0, i32 0
+  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t45)
+  %t46 = getelementptr [9 x i8], [9 x i8]* @.str46, i32 0, i32 0
+  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t46)
   ret double 0.0
 }
 
 define double @render_head(double %arg0) {
 entry:
-  %t0 = getelementptr [16 x i8], [16 x i8]* @.str41, i32 0, i32 0
+  %t0 = getelementptr [16 x i8], [16 x i8]* @.str47, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t0)
-  %t1 = getelementptr [17 x i8], [17 x i8]* @.str42, i32 0, i32 0
+  %t1 = getelementptr [17 x i8], [17 x i8]* @.str48, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t1)
-  %t2 = getelementptr [7 x i8], [7 x i8]* @.str43, i32 0, i32 0
+  %t2 = getelementptr [7 x i8], [7 x i8]* @.str49, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t2)
-  %t3 = getelementptr [23 x i8], [23 x i8]* @.str44, i32 0, i32 0
+  %t3 = getelementptr [23 x i8], [23 x i8]* @.str50, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t3)
-  %t4 = getelementptr [71 x i8], [71 x i8]* @.str45, i32 0, i32 0
+  %t4 = getelementptr [71 x i8], [71 x i8]* @.str51, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t4)
-  %t5 = getelementptr [56 x i8], [56 x i8]* @.str46, i32 0, i32 0
+  %t5 = getelementptr [56 x i8], [56 x i8]* @.str52, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t5)
-  %t6 = getelementptr [43 x i8], [43 x i8]* @.str47, i32 0, i32 0
+  %t6 = getelementptr [43 x i8], [43 x i8]* @.str53, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t6)
-  %t7 = getelementptr [8 x i8], [8 x i8]* @.str48, i32 0, i32 0
+  %t7 = getelementptr [8 x i8], [8 x i8]* @.str54, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t7)
   %t8 = fadd double 0.0, %arg0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_num, i32 0, i32 0), double %t8)
-  %t9 = getelementptr [20 x i8], [20 x i8]* @.str49, i32 0, i32 0
+  %t9 = getelementptr [20 x i8], [20 x i8]* @.str55, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t9)
   ; call render_css
   %t10 = call double @render_css()
@@ -336,93 +342,57 @@ entry:
 
 define double @render_header() {
 entry:
-  %t0 = getelementptr [8 x i8], [8 x i8]* @.str50, i32 0, i32 0
+  %t0 = getelementptr [8 x i8], [8 x i8]* @.str56, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t0)
-  %t1 = getelementptr [7 x i8], [7 x i8]* @.str51, i32 0, i32 0
+  %t1 = getelementptr [7 x i8], [7 x i8]* @.str57, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t1)
-  %t2 = getelementptr [19 x i8], [19 x i8]* @.str52, i32 0, i32 0
+  %t2 = getelementptr [24 x i8], [24 x i8]* @.str58, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t2)
-  %t3 = getelementptr [24 x i8], [24 x i8]* @.str53, i32 0, i32 0
+  %t3 = getelementptr [6 x i8], [6 x i8]* @.str59, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t3)
-  %t4 = getelementptr [9 x i8], [9 x i8]* @.str54, i32 0, i32 0
+  %t4 = getelementptr [23 x i8], [23 x i8]* @.str60, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t4)
-  %t5 = getelementptr [6 x i8], [6 x i8]* @.str55, i32 0, i32 0
+  %t5 = getelementptr [29 x i8], [29 x i8]* @.str61, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t5)
-  %t6 = getelementptr [49 x i8], [49 x i8]* @.str56, i32 0, i32 0
+  %t6 = getelementptr [27 x i8], [27 x i8]* @.str62, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t6)
-  %t7 = getelementptr [23 x i8], [23 x i8]* @.str57, i32 0, i32 0
+  %t7 = getelementptr [33 x i8], [33 x i8]* @.str63, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t7)
-  %t8 = getelementptr [30 x i8], [30 x i8]* @.str58, i32 0, i32 0
+  %t8 = getelementptr [4 x i8], [4 x i8]* @.str64, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t8)
-  %t9 = getelementptr [36 x i8], [36 x i8]* @.str59, i32 0, i32 0
+  %t9 = getelementptr [7 x i8], [7 x i8]* @.str65, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t9)
-  %t10 = getelementptr [40 x i8], [40 x i8]* @.str60, i32 0, i32 0
+  %t10 = getelementptr [7 x i8], [7 x i8]* @.str66, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t10)
-  %t11 = getelementptr [6 x i8], [6 x i8]* @.str61, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t11)
-  %t12 = getelementptr [80 x i8], [80 x i8]* @.str62, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t12)
-  %t13 = getelementptr [78 x i8], [78 x i8]* @.str63, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t13)
-  %t14 = getelementptr [40 x i8], [40 x i8]* @.str64, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t14)
-  %t15 = getelementptr [44 x i8], [44 x i8]* @.str65, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t15)
-  %t16 = getelementptr [46 x i8], [46 x i8]* @.str66, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t16)
-  %t17 = getelementptr [54 x i8], [54 x i8]* @.str67, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t17)
-  %t18 = getelementptr [58 x i8], [58 x i8]* @.str68, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t18)
-  %t19 = getelementptr [44 x i8], [44 x i8]* @.str69, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t19)
-  %t20 = getelementptr [46 x i8], [46 x i8]* @.str70, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t20)
-  %t21 = getelementptr [7 x i8], [7 x i8]* @.str71, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t21)
-  %t22 = getelementptr [10 x i8], [10 x i8]* @.str72, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t22)
-  %t23 = getelementptr [7 x i8], [7 x i8]* @.str73, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t23)
-  %t24 = getelementptr [10 x i8], [10 x i8]* @.str74, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t24)
-  %t25 = getelementptr [7 x i8], [7 x i8]* @.str75, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t25)
   ret double 0.0
 }
 
 define double @render_footer() {
 entry:
-  %t0 = getelementptr [8 x i8], [8 x i8]* @.str76, i32 0, i32 0
+  %t0 = getelementptr [8 x i8], [8 x i8]* @.str67, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t0)
-  %t1 = getelementptr [9 x i8], [9 x i8]* @.str77, i32 0, i32 0
+  %t1 = getelementptr [9 x i8], [9 x i8]* @.str68, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t1)
-  %t2 = getelementptr [29 x i8], [29 x i8]* @.str78, i32 0, i32 0
+  %t2 = getelementptr [56 x i8], [56 x i8]* @.str69, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t2)
-  %t3 = getelementptr [30 x i8], [30 x i8]* @.str79, i32 0, i32 0
+  %t3 = getelementptr [10 x i8], [10 x i8]* @.str70, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t3)
-  %t4 = getelementptr [86 x i8], [86 x i8]* @.str80, i32 0, i32 0
+  %t4 = getelementptr [7 x i8], [7 x i8]* @.str71, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t4)
-  %t5 = getelementptr [7 x i8], [7 x i8]* @.str81, i32 0, i32 0
+  %t5 = getelementptr [92 x i8], [92 x i8]* @.str72, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t5)
-  %t6 = getelementptr [10 x i8], [10 x i8]* @.str82, i32 0, i32 0
+  %t6 = getelementptr [9 x i8], [9 x i8]* @.str73, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t6)
-  %t7 = getelementptr [7 x i8], [7 x i8]* @.str83, i32 0, i32 0
+  %t7 = getelementptr [257 x i8], [257 x i8]* @.str74, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t7)
-  %t8 = getelementptr [7 x i8], [7 x i8]* @.str84, i32 0, i32 0
+  %t8 = getelementptr [261 x i8], [261 x i8]* @.str75, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t8)
-  %t9 = getelementptr [9 x i8], [9 x i8]* @.str85, i32 0, i32 0
+  %t9 = getelementptr [10 x i8], [10 x i8]* @.str76, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t9)
-  %t10 = getelementptr [182 x i8], [182 x i8]* @.str86, i32 0, i32 0
+  %t10 = getelementptr [8 x i8], [8 x i8]* @.str77, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t10)
-  %t11 = getelementptr [186 x i8], [186 x i8]* @.str87, i32 0, i32 0
+  %t11 = getelementptr [8 x i8], [8 x i8]* @.str78, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t11)
-  %t12 = getelementptr [10 x i8], [10 x i8]* @.str88, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t12)
-  %t13 = getelementptr [8 x i8], [8 x i8]* @.str89, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t13)
-  %t14 = getelementptr [8 x i8], [8 x i8]* @.str90, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t14)
   ret double 0.0
 }
 
@@ -434,46 +404,56 @@ entry:
   %t0 = call double @render_head(double %t1)
   ; call render_header
   %t2 = call double @render_header()
-  %t3 = getelementptr [10 x i8], [10 x i8]* @.str91, i32 0, i32 0
+  %t3 = getelementptr [10 x i8], [10 x i8]* @.str79, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t3)
-  %t4 = getelementptr [29 x i8], [29 x i8]* @.str92, i32 0, i32 0
+  %t4 = getelementptr [18 x i8], [18 x i8]* @.str80, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t4)
-  %t5 = getelementptr [152 x i8], [152 x i8]* @.str93, i32 0, i32 0
+  %t5 = getelementptr [186 x i8], [186 x i8]* @.str81, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t5)
-  %t6 = getelementptr [18 x i8], [18 x i8]* @.str94, i32 0, i32 0
+  %t6 = getelementptr [89 x i8], [89 x i8]* @.str82, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t6)
-  %t7 = getelementptr [5 x i8], [5 x i8]* @.str95, i32 0, i32 0
+  %t7 = getelementptr [18 x i8], [18 x i8]* @.str83, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t7)
-  %t8 = getelementptr [43 x i8], [43 x i8]* @.str96, i32 0, i32 0
+  %t8 = getelementptr [5 x i8], [5 x i8]* @.str84, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t8)
-  %t9 = getelementptr [41 x i8], [41 x i8]* @.str97, i32 0, i32 0
+  %t9 = getelementptr [50 x i8], [50 x i8]* @.str85, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t9)
-  %t10 = getelementptr [38 x i8], [38 x i8]* @.str98, i32 0, i32 0
+  %t10 = getelementptr [48 x i8], [48 x i8]* @.str86, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t10)
-  %t11 = getelementptr [42 x i8], [42 x i8]* @.str99, i32 0, i32 0
+  %t11 = getelementptr [53 x i8], [53 x i8]* @.str87, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t11)
-  %t12 = getelementptr [48 x i8], [48 x i8]* @.str100, i32 0, i32 0
+  %t12 = getelementptr [47 x i8], [47 x i8]* @.str88, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t12)
-  %t13 = getelementptr [6 x i8], [6 x i8]* @.str101, i32 0, i32 0
+  %t13 = getelementptr [47 x i8], [47 x i8]* @.str89, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t13)
-  %t14 = getelementptr [21 x i8], [21 x i8]* @.str102, i32 0, i32 0
+  %t14 = getelementptr [6 x i8], [6 x i8]* @.str90, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t14)
-  %t15 = getelementptr [76 x i8], [76 x i8]* @.str103, i32 0, i32 0
+  %t15 = getelementptr [20 x i8], [20 x i8]* @.str91, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t15)
-  %t16 = getelementptr [28 x i8], [28 x i8]* @.str104, i32 0, i32 0
+  %t16 = getelementptr [28 x i8], [28 x i8]* @.str92, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t16)
-  %t17 = fadd double 0.0, 5.0
-  %t18 = fadd double 0.0, 3.0
-  %t19 = fadd double %t17, %t18
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_num, i32 0, i32 0), double %t19)
-  %t20 = getelementptr [12 x i8], [12 x i8]* @.str105, i32 0, i32 0
+  %t17 = getelementptr [5 x i8], [5 x i8]* @.str93, i32 0, i32 0
+  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t17)
+  %t18 = getelementptr [58 x i8], [58 x i8]* @.str94, i32 0, i32 0
+  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t18)
+  %t19 = getelementptr [80 x i8], [80 x i8]* @.str95, i32 0, i32 0
+  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t19)
+  %t20 = getelementptr [6 x i8], [6 x i8]* @.str96, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t20)
-  %t21 = getelementptr [65 x i8], [65 x i8]* @.str106, i32 0, i32 0
+  %t21 = getelementptr [15 x i8], [15 x i8]* @.str97, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t21)
-  %t22 = getelementptr [11 x i8], [11 x i8]* @.str107, i32 0, i32 0
+  %t22 = getelementptr [5 x i8], [5 x i8]* @.str98, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t22)
+  %t23 = getelementptr [80 x i8], [80 x i8]* @.str99, i32 0, i32 0
+  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t23)
+  %t24 = getelementptr [69 x i8], [69 x i8]* @.str100, i32 0, i32 0
+  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t24)
+  %t25 = getelementptr [6 x i8], [6 x i8]* @.str101, i32 0, i32 0
+  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t25)
+  %t26 = getelementptr [11 x i8], [11 x i8]* @.str102, i32 0, i32 0
+  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t26)
   ; call render_footer
-  %t23 = call double @render_footer()
+  %t27 = call double @render_footer()
   ret double 0.0
 }
 
@@ -485,44 +465,42 @@ entry:
   %t0 = call double @render_head(double %t1)
   ; call render_header
   %t2 = call double @render_header()
-  %t3 = getelementptr [10 x i8], [10 x i8]* @.str108, i32 0, i32 0
+  %t3 = getelementptr [10 x i8], [10 x i8]* @.str103, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t3)
-  %t4 = getelementptr [24 x i8], [24 x i8]* @.str109, i32 0, i32 0
+  %t4 = getelementptr [15 x i8], [15 x i8]* @.str104, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t4)
-  %t5 = getelementptr [171 x i8], [171 x i8]* @.str110, i32 0, i32 0
+  %t5 = getelementptr [171 x i8], [171 x i8]* @.str105, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t5)
-  %t6 = getelementptr [26 x i8], [26 x i8]* @.str111, i32 0, i32 0
+  %t6 = getelementptr [26 x i8], [26 x i8]* @.str106, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t6)
-  %t7 = getelementptr [5 x i8], [5 x i8]* @.str112, i32 0, i32 0
+  %t7 = getelementptr [5 x i8], [5 x i8]* @.str107, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t7)
-  %t8 = getelementptr [102 x i8], [102 x i8]* @.str113, i32 0, i32 0
+  %t8 = getelementptr [98 x i8], [98 x i8]* @.str108, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t8)
-  %t9 = getelementptr [86 x i8], [86 x i8]* @.str114, i32 0, i32 0
+  %t9 = getelementptr [91 x i8], [91 x i8]* @.str109, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t9)
-  %t10 = getelementptr [101 x i8], [101 x i8]* @.str115, i32 0, i32 0
+  %t10 = getelementptr [99 x i8], [99 x i8]* @.str110, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t10)
-  %t11 = getelementptr [6 x i8], [6 x i8]* @.str116, i32 0, i32 0
+  %t11 = getelementptr [6 x i8], [6 x i8]* @.str111, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t11)
-  %t12 = getelementptr [22 x i8], [22 x i8]* @.str117, i32 0, i32 0
+  %t12 = getelementptr [20 x i8], [20 x i8]* @.str112, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t12)
-  %t13 = getelementptr [42 x i8], [42 x i8]* @.str118, i32 0, i32 0
+  %t13 = getelementptr [43 x i8], [43 x i8]* @.str113, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t13)
-  %t14 = getelementptr [5 x i8], [5 x i8]* @.str119, i32 0, i32 0
+  %t14 = getelementptr [5 x i8], [5 x i8]* @.str114, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t14)
-  %t15 = getelementptr [70 x i8], [70 x i8]* @.str120, i32 0, i32 0
+  %t15 = getelementptr [26 x i8], [26 x i8]* @.str115, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t15)
-  %t16 = getelementptr [70 x i8], [70 x i8]* @.str121, i32 0, i32 0
+  %t16 = getelementptr [27 x i8], [27 x i8]* @.str116, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t16)
-  %t17 = getelementptr [81 x i8], [81 x i8]* @.str122, i32 0, i32 0
+  %t17 = getelementptr [38 x i8], [38 x i8]* @.str117, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t17)
-  %t18 = getelementptr [6 x i8], [6 x i8]* @.str123, i32 0, i32 0
+  %t18 = getelementptr [6 x i8], [6 x i8]* @.str118, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t18)
-  %t19 = getelementptr [106 x i8], [106 x i8]* @.str124, i32 0, i32 0
+  %t19 = getelementptr [11 x i8], [11 x i8]* @.str119, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t19)
-  %t20 = getelementptr [11 x i8], [11 x i8]* @.str125, i32 0, i32 0
-  call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t20)
   ; call render_footer
-  %t21 = call double @render_footer()
+  %t20 = call double @render_footer()
   ret double 0.0
 }
 
@@ -534,47 +512,47 @@ entry:
   %t0 = call double @render_head(double %t1)
   ; call render_header
   %t2 = call double @render_header()
-  %t3 = getelementptr [10 x i8], [10 x i8]* @.str126, i32 0, i32 0
+  %t3 = getelementptr [10 x i8], [10 x i8]* @.str120, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t3)
-  %t4 = getelementptr [22 x i8], [22 x i8]* @.str127, i32 0, i32 0
+  %t4 = getelementptr [17 x i8], [17 x i8]* @.str121, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t4)
-  %t5 = getelementptr [59 x i8], [59 x i8]* @.str128, i32 0, i32 0
+  %t5 = getelementptr [59 x i8], [59 x i8]* @.str122, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t5)
-  %t6 = getelementptr [26 x i8], [26 x i8]* @.str129, i32 0, i32 0
+  %t6 = getelementptr [26 x i8], [26 x i8]* @.str123, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t6)
-  %t7 = getelementptr [5 x i8], [5 x i8]* @.str130, i32 0, i32 0
+  %t7 = getelementptr [5 x i8], [5 x i8]* @.str124, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t7)
-  %t8 = getelementptr [81 x i8], [81 x i8]* @.str131, i32 0, i32 0
+  %t8 = getelementptr [60 x i8], [60 x i8]* @.str125, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t8)
-  %t9 = getelementptr [78 x i8], [78 x i8]* @.str132, i32 0, i32 0
+  %t9 = getelementptr [60 x i8], [60 x i8]* @.str126, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t9)
-  %t10 = getelementptr [88 x i8], [88 x i8]* @.str133, i32 0, i32 0
+  %t10 = getelementptr [67 x i8], [67 x i8]* @.str127, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t10)
-  %t11 = getelementptr [76 x i8], [76 x i8]* @.str134, i32 0, i32 0
+  %t11 = getelementptr [61 x i8], [61 x i8]* @.str128, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t11)
-  %t12 = getelementptr [6 x i8], [6 x i8]* @.str135, i32 0, i32 0
+  %t12 = getelementptr [6 x i8], [6 x i8]* @.str129, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t12)
-  %t13 = getelementptr [25 x i8], [25 x i8]* @.str136, i32 0, i32 0
+  %t13 = getelementptr [25 x i8], [25 x i8]* @.str130, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t13)
-  %t14 = getelementptr [5 x i8], [5 x i8]* @.str137, i32 0, i32 0
+  %t14 = getelementptr [5 x i8], [5 x i8]* @.str131, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t14)
-  %t15 = getelementptr [66 x i8], [66 x i8]* @.str138, i32 0, i32 0
+  %t15 = getelementptr [66 x i8], [66 x i8]* @.str132, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t15)
-  %t16 = getelementptr [62 x i8], [62 x i8]* @.str139, i32 0, i32 0
+  %t16 = getelementptr [62 x i8], [62 x i8]* @.str133, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t16)
-  %t17 = getelementptr [62 x i8], [62 x i8]* @.str140, i32 0, i32 0
+  %t17 = getelementptr [62 x i8], [62 x i8]* @.str134, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t17)
-  %t18 = getelementptr [62 x i8], [62 x i8]* @.str141, i32 0, i32 0
+  %t18 = getelementptr [63 x i8], [63 x i8]* @.str135, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t18)
-  %t19 = getelementptr [76 x i8], [76 x i8]* @.str142, i32 0, i32 0
+  %t19 = getelementptr [6 x i8], [6 x i8]* @.str136, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t19)
-  %t20 = getelementptr [65 x i8], [65 x i8]* @.str143, i32 0, i32 0
+  %t20 = getelementptr [13 x i8], [13 x i8]* @.str137, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t20)
-  %t21 = getelementptr [63 x i8], [63 x i8]* @.str144, i32 0, i32 0
+  %t21 = getelementptr [28 x i8], [28 x i8]* @.str138, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t21)
-  %t22 = getelementptr [6 x i8], [6 x i8]* @.str145, i32 0, i32 0
+  %t22 = getelementptr [41 x i8], [41 x i8]* @.str139, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t22)
-  %t23 = getelementptr [11 x i8], [11 x i8]* @.str146, i32 0, i32 0
+  %t23 = getelementptr [11 x i8], [11 x i8]* @.str140, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t23)
   ; call render_footer
   %t24 = call double @render_footer()
@@ -589,15 +567,15 @@ entry:
   %t0 = call double @render_head(double %t1)
   ; call render_header
   %t2 = call double @render_header()
-  %t3 = getelementptr [30 x i8], [30 x i8]* @.str147, i32 0, i32 0
+  %t3 = getelementptr [30 x i8], [30 x i8]* @.str141, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t3)
-  %t4 = getelementptr [13 x i8], [13 x i8]* @.str148, i32 0, i32 0
+  %t4 = getelementptr [13 x i8], [13 x i8]* @.str142, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t4)
-  %t5 = getelementptr [46 x i8], [46 x i8]* @.str149, i32 0, i32 0
+  %t5 = getelementptr [23 x i8], [23 x i8]* @.str143, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t5)
-  %t6 = getelementptr [43 x i8], [43 x i8]* @.str150, i32 0, i32 0
+  %t6 = getelementptr [40 x i8], [40 x i8]* @.str144, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t6)
-  %t7 = getelementptr [11 x i8], [11 x i8]* @.str151, i32 0, i32 0
+  %t7 = getelementptr [11 x i8], [11 x i8]* @.str145, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t7)
   ; call render_footer
   %t8 = call double @render_footer()
@@ -606,9 +584,9 @@ entry:
 
 define double @render_raw() {
 entry:
-  %t0 = getelementptr [9 x i8], [9 x i8]* @.str152, i32 0, i32 0
+  %t0 = getelementptr [9 x i8], [9 x i8]* @.str146, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t0)
-  %t1 = getelementptr [36 x i8], [36 x i8]* @.str153, i32 0, i32 0
+  %t1 = getelementptr [36 x i8], [36 x i8]* @.str147, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t1)
   %t2 = fadd double 0.0, 5.0
   %t3 = fadd double 0.0, 3.0
