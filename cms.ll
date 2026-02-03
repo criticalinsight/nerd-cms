@@ -189,7 +189,7 @@ declare void @nerd_json_free_string(i8*)
 @.str122 = private constant [10 x i8] c"<article>\00"
 @.str123 = private constant [11 x i8] c"</article>\00"
 @.str124 = private constant [68 x i8] c"<?xml version=\221.0\22 encoding=\22UTF-8\22 ?><rss version=\222.0\22><channel>\00"
-@.str125 = private constant [67 x i8] c"<title>NerdCMS</title><link>https://research.moecapital.com</link>\00"
+@.str125 = private constant [68 x i8] c"<title>Research</title><link>https://research.moecapital.com</link>\00"
 @.str126 = private constant [17 x i8] c"</channel></rss>\00"
 
 define double @render_admin() {
@@ -523,7 +523,7 @@ define double @render_rss() {
 entry:
   %t0 = getelementptr [68 x i8], [68 x i8]* @.str120, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t0)
-  %t1 = getelementptr [67 x i8], [67 x i8]* @.str121, i32 0, i32 0
+  %t1 = getelementptr [68 x i8], [68 x i8]* @.str121, i32 0, i32 0
   call i32 (i8*, ...) @printf(i8* getelementptr ([4 x i8], [4 x i8]* @.fmt_str, i32 0, i32 0), i8* %t1)
   ; call print_buffer
   %t2 = call double @print_buffer()

@@ -162,14 +162,8 @@ export default {
         return { slug: k.name.replace("post:", ""), ...meta, published: true };
       }))).filter(p => p.published !== false);
 
-      // COMPOUND SORT: Rating (🟢 > 🟡 > 🔴) then Market Cap (Descending)
-      const ratingWeight = { "🟢": 3, "🟡": 2, "🔴": 1 };
-      posts.sort((a, b) => {
-        const rA = ratingWeight[a.rating] || 0;
-        const rB = ratingWeight[b.rating] || 0;
-        if (rB !== rA) return rB - rA;
-        return (parseFloat(b.market_cap) || 0) - (parseFloat(a.market_cap) || 0);
-      });
+      // SORT: Most recent first (date descending)
+      posts.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 
       return callWasmRender(posts, "render_home", url, env);
     }
