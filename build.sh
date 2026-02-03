@@ -14,10 +14,12 @@ echo "=== NERD CMS Build Pipeline ==="
 echo "[1/4] Compiling NERD -> LLVM IR"
 ./nerd-darwin-arm64/nerd compile "$NERD_FILE" -o "${BASENAME}.ll"
 
-# Step 1.5: Inject missing declarations for runtime functions
-echo "[1.5/4] Injecting external declarations"
-# Insert declarations after the second line (after the header comments)
-sed -i '' '3i\
+# Step 1.5: Inject missing declarations and target info
+echo "[1.5/4] Injecting target info and external declarations"
+# Insert at the top of the file
+sed -i '' '1i\
+target datalayout = "e-m:e-p:32:32-p10:8:8-p20:8:8-i64:64-i128:128-n32:64-S128-ni:1:10:20"\
+target triple = "wasm32-unknown-unknown"\
 declare double @print_buffer()\
 declare double @wasm_get_shared_buffer()\
 ' "${BASENAME}.ll"
