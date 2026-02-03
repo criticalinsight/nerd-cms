@@ -177,10 +177,10 @@ export default {
     // Blog pages (rendered from KV content)
     // ========================================================================
 
-    // GET /blog - List posts
+    // GET /blog - List posts with server-side search and sort
     if (currentPath === "/blog") {
       const list = await env.CONTENT.list({ prefix: "post:" });
-      const posts = (await Promise.all(
+      let posts = (await Promise.all(
         list.keys.map(async (k) => {
           if (k.metadata) return { slug: k.name.replace("post:", ""), ...k.metadata };
           const content = await env.CONTENT.get(k.name);
@@ -189,14 +189,31 @@ export default {
         })
       )).filter(p => p.published !== false);
       
-      // COMPOUND SORT: Rating (🟢 > 🟡 > 🔴) then Market Cap (Descending)
-      const ratingWeight = { "🟢": 3, "🟡": 2, "🔴": 1 };
-      posts.sort((a, b) => {
-        const rA = ratingWeight[a.rating] || 0;
-        const rB = ratingWeight[b.rating] || 0;
-        if (rB !== rA) return rB - rA;
-        return (parseFloat(b.market_cap) || 0) - (parseFloat(a.market_cap) || 0);
-      });
+      // SERVER-SIDE FILTERING (No-JS)
+      const q = url.searchParams.get("q")?.toLowerCase();
+      if (q) {
+        posts = posts.filter(p => {
+          const text = ((p.title || p.slug) + " " + (p.category || "") + " " + (Array.isArray(p.tags) ? p.tags.join(" ") : (p.tags || ""))).toLowerCase();
+          return text.includes(q);
+        });
+      }
+
+      // SERVER-SIDE SORTING (No-JS)
+      const sortBy = url.searchParams.get("sort") || "date";
+      if (sortBy === "market-cap") {
+        posts.sort((a, b) => (parseFloat(b.market_cap) || 0) - (parseFloat(a.market_cap) || 0));
+      } else if (sortBy === "rating") {
+        const ratingWeight = { "🟢": 3, "🟡": 2, "🔴": 1 };
+        posts.sort((a, b) => (ratingWeight[b.rating] || 0) - (ratingWeight[a.rating] || 0));
+      } else if (sortBy === "category") {
+        posts.sort((a, b) => (a.category || "").localeCompare(b.category || ""));
+      } else if (sortBy === "tag") {
+        const firstTag = p => Array.isArray(p.tags) ? p.tags[0] : (p.tags || "").split(",")[0];
+        posts.sort((a, b) => (firstTag(a) || "").localeCompare(firstTag(b) || ""));
+      } else {
+        // Default: Date Descending
+        posts.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+      }
 
       return callWasmRender(posts, "render_blog", url, env);
     }
@@ -447,6 +464,8 @@ export default {
          rating: meta.rating || "🟡",
          market_cap: meta.market_cap || 0,
          market_cap_formatted: meta.market_cap_formatted || "",
+         category: meta.category || "",
+         tags: meta.tags || "",
          published: meta.published !== false 
       };
       await env.CONTENT.put(`post:${slug}`, content, { metadata });
@@ -602,7 +621,12 @@ async function callWasmRender(data, exportName, url, env) {
   if (instance.exports[exportName]) instance.exports[exportName]();
   else if (instance.exports.main) instance.exports.main();
 
-  return new Response(localBuffer.join(""), {
+  const html = localBuffer.join("");
+  const finalHtml = html
+    .replace('value="CURRENT_Q"', `value="${url.searchParams.get("q") || ""}"`)
+    .replace(`class="sort-tab ${url.searchParams.get("sort") || "date"}"`, `class="sort-tab active"`);
+
+  return new Response(finalHtml, {
     headers: { "Content-Type": "text/html; charset=utf-8", "X-Powered-By": "NERD-CMS" },
   });
 }

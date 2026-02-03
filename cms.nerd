@@ -84,6 +84,14 @@ fn render_css
   out "pre code{background:none;color:inherit;padding:0}"
   out "article{margin-bottom:2.5rem}"
   out ".post-meta{font-size:.9rem;color:var(--text-light);margin-bottom:1rem}"
+  out ".floating-footer{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);width:min(90%,42rem);background:var(--bg);backdrop-filter:blur(10px);border:1px solid var(--accent);border-radius:50px;padding:0.5rem 1.5rem;display:flex;align-items:center;gap:1rem;z-index:1000;box-shadow:0 10px 30px rgba(0,0,0,0.3);opacity:0.95;transition:all 0.3s}"
+  out ".floating-footer:focus-within{opacity:1;border-color:var(--link)}"
+  out ".floating-footer form{display:flex;flex:1;align-items:center;gap:1rem}"
+  out ".search-input{flex:1;background:none;border:none;color:var(--text);font-family:var(--mono-font);outline:none;padding:0.5rem;font-size:1rem}"
+  out ".sort-tabs{display:flex;gap:0.3rem;align-items:center}"
+  out ".sort-tab{padding:0.25rem 0.6rem;border-radius:20px;font-size:0.7rem;background:var(--bg-light);color:var(--text-light);text-transform:uppercase;letter-spacing:1px;white-space:nowrap;border:1px solid transparent;cursor:pointer;font-family:var(--mono-font)}"
+  out ".sort-tab:hover{background:var(--accent);color:var(--accent-text)}"
+  out ".sort-tab.active{background:var(--accent);color:var(--accent-text);font-weight:700;border-color:var(--accent-light)}"
   out "</style>"
 
 fn render_head title
@@ -148,9 +156,19 @@ fn render_about
 fn render_blog
   call render_head "anemone | Blog"
   call render_header
-  out "<h2>Blog Posts</h2><ul>"
+  out "<h2>Blog Posts</h2><ul id=\"post-list\">"
   call print_buffer
   out "</ul>"
+  
+  out "<div class=\"floating-footer\">"
+  out "<form action=\"/blog\" method=\"GET\">"
+  out "<input type=\"text\" name=\"q\" class=\"search-input\" placeholder=\"Search analyst notes...\" autocomplete=\"off\" value=\"CURRENT_Q\">"
+  out "<div class=\"sort-tabs\">"
+  out "<button type=\"submit\" name=\"sort\" value=\"date\" class=\"sort-tab date\">Date</button>"
+  out "<button type=\"submit\" name=\"sort\" value=\"market-cap\" class=\"sort-tab market-cap\">Cap</button>"
+  out "<button type=\"submit\" name=\"sort\" value=\"rating\" class=\"sort-tab rating\">Rating</button>"
+  out "</div>"
+  out "</form></div>"
   call render_footer
 
 fn render_post
