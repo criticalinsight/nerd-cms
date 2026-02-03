@@ -18,10 +18,12 @@ CRITICAL: DO NOT include any introductory or concluding conversational filler. D
 
 SINGLE TICKER RULE: You must ONLY analyze the specific symbol provided in the prompt. NEVER mention or batch other companies into the same post. Each post must be a distinct analysis of exactly one company.
 
-You must assign a rating at the end of your analysis based on the following:
+You must assign a rating based on the following:
 🟢 = Buy (Strong fundamentals, attractive valuation)
 🟡 = Hold (Strong fundamentals, fair valuation; or neutral outlook)
-🔴 = Sell (Deteriorating fundamentals or extreme overvaluation)`;
+🔴 = Sell (Deteriorating fundamentals or extreme overvaluation)
+
+You must also identify the company's current Market Capitalization in USD Billions.`;
 
 function readCString(memory, ptr) {
   const bytes = new Uint8Array(memory.buffer);
@@ -74,6 +76,7 @@ function parseFrontmatter(content) {
        let val = vals.join(':').trim();
        if (val === "true") val = true;
        if (val === "false") val = false;
+       if (key.trim() === 'market_cap') val = parseFloat(val);
        meta[key.trim()] = val;
     }
   });
@@ -158,7 +161,16 @@ export default {
         const { meta } = parseFrontmatter(c || "");
         return { slug: k.name.replace("post:", ""), ...meta, published: true };
       }))).filter(p => p.published !== false);
-      posts.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+
+      // COMPOUND SORT: Rating (🟢 > 🟡 > 🔴) then Market Cap (Descending)
+      const ratingWeight = { "🟢": 3, "🟡": 2, "🔴": 1 };
+      posts.sort((a, b) => {
+        const rA = ratingWeight[a.rating] || 0;
+        const rB = ratingWeight[b.rating] || 0;
+        if (rB !== rA) return rB - rA;
+        return (parseFloat(b.market_cap) || 0) - (parseFloat(a.market_cap) || 0);
+      });
+
       return callWasmRender(posts, "render_home", url, env);
     }
 
@@ -176,17 +188,22 @@ export default {
       const list = await env.CONTENT.list({ prefix: "post:" });
       const posts = (await Promise.all(
         list.keys.map(async (k) => {
-          // Optimization: Use KV metadata if available
           if (k.metadata) return { slug: k.name.replace("post:", ""), ...k.metadata };
-          // Fallback for legacy posts
           const content = await env.CONTENT.get(k.name);
           const { meta } = parseFrontmatter(content || "");
           return { slug: k.name.replace("post:", ""), ...meta, published: true };
         })
-      )).filter(p => p.published !== false); // Filter drafts
-      posts.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+      )).filter(p => p.published !== false);
       
-      // Pass data to Wasm and render
+      // COMPOUND SORT: Rating (🟢 > 🟡 > 🔴) then Market Cap (Descending)
+      const ratingWeight = { "🟢": 3, "🟡": 2, "🔴": 1 };
+      posts.sort((a, b) => {
+        const rA = ratingWeight[a.rating] || 0;
+        const rB = ratingWeight[b.rating] || 0;
+        if (rB !== rA) return rB - rA;
+        return (parseFloat(b.market_cap) || 0) - (parseFloat(a.market_cap) || 0);
+      });
+
       return callWasmRender(posts, "render_blog", url, env);
     }
 
@@ -363,7 +380,7 @@ export default {
           const { meta } = parseFrontmatter(c || "");
           return { id: k.name, url: `${url.origin}/blog/${k.name.replace("post:","")}`, ...meta };
        }))).filter(p => p.published !== false);
-       return new Response(JSON.stringify({ version: "https://jsonfeed.org/version/1.1", title: "NerdCMS", items: posts }, null, 2), {
+       return new Response(JSON.stringify({ version: "https://jsonfeed.org/version/1.1", title: "Research", items: posts }, null, 2), {
          headers: { "Content-Type": "application/json" }
        });
     }
@@ -433,6 +450,9 @@ export default {
       const metadata = { 
          title: meta.title || slug.toUpperCase(), 
          date: meta.date || new Date().toISOString().split('T')[0], 
+         rating: meta.rating || "🟡",
+         market_cap: meta.market_cap || 0,
+         market_cap_formatted: meta.market_cap_formatted || "",
          published: meta.published !== false 
       };
       await env.CONTENT.put(`post:${slug}`, content, { metadata });
@@ -456,7 +476,9 @@ Output format (START IMMEDIATELY WITH THIS):
 title: ${symbol} Analysis
 date: ${new Date().toISOString().split('T')[0]}
 author: Moe
-rating: [Emoji based on conclusion: 🟢, 🟡, or 🔴]
+rating: [Emoji: 🟢, 🟡, or 🔴]
+market_cap: [Number only, USD Billions, e.g. 3100.5]
+market_cap_formatted: [E.g. $3.1T or $450B]
 ---
 
 Executive Summary (about 150–200 words)

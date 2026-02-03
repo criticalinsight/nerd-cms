@@ -163,7 +163,7 @@ fn render_post
 
 fn render_rss
   out "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><rss version=\"2.0\"><channel>"
-  out "<title>NerdCMS</title><link>https://research.moecapital.com</link>"
+  out "<title>Research</title><link>https://research.moecapital.com</link>"
   call print_buffer
   out "</channel></rss>"
 
