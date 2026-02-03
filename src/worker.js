@@ -460,6 +460,9 @@ export default {
       const { meta } = parseFrontmatter(content);
       const metadata = { 
          title: meta.title || slug.toUpperCase(), 
+         company_name: meta.company_name || "",
+         stock_price: meta.stock_price || "",
+         pe_ratio: meta.pe_ratio || "",
          date: meta.date || new Date().toISOString().split('T')[0], 
          rating: meta.rating || "🟡",
          market_cap: meta.market_cap || 0,
@@ -486,7 +489,10 @@ export default {
 
 Output format (START IMMEDIATELY WITH THIS):
 ---
-title: ${symbol} Analysis
+title: ${symbol} - [Full Company Name] | $[Price] | PE [PE Ratio] | [Market Cap Formatted]
+company_name: [Full Company Name]
+stock_price: [Current Price with Currency Symbol, e.g. $214.50]
+pe_ratio: [Current TTM P/E Ratio, e.g. 32.4]
 date: ${new Date().toISOString().split('T')[0]}
 author: Moe
 rating: [Emoji: 🟢, 🟡, or 🔴]
@@ -609,7 +615,14 @@ async function callWasmRender(data, exportName, url, env) {
     if (typeof data === "string") {
       dataStr = data;
     } else if (Array.isArray(data)) {
-      dataStr = data.map(p => `<li><a href="/blog/${p.slug}">${p.title || p.slug}</a> <span class="text-secondary">(${p.date || ''})</span></li>`).join("");
+      dataStr = data.map(p => {
+        let displayTitle = p.title || p.slug;
+        // If we have the specific financial fields, use them to construct an ultra-high-signal title
+        if (p.company_name && p.stock_price && p.pe_ratio) {
+           displayTitle = `${p.company_name} | ${p.stock_price} | PE: ${p.pe_ratio} | ${p.market_cap_formatted}`;
+        }
+        return `<li><a href="/blog/${p.slug}">${displayTitle}</a> <span class="text-secondary">(${p.date || ''})</span></li>`;
+      }).join("");
     } else {
       dataStr = `<h1>${data.title || data.slug}</h1>` +
                 `<div class="post-meta">${data.date || ''} ${data.author ? `by ${data.author}` : ''}</div>` +
